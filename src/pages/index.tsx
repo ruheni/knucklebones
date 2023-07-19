@@ -13,7 +13,7 @@ export default function Home() {
         <meta name="description" content="Knucklebones game" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column" justifyContent="center" alignItems="center">
+      <Flex h="100vh" direction="column" justifyContent="center" alignItems="center" gap={8}>
         <Heading>Knucklebones</Heading>
         <Text>
           {hello.data ? hello.data.greeting : "Loading tRPC query..."}
