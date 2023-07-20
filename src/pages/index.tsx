@@ -1,6 +1,6 @@
 import Head from "next/head";
 // import { api } from "~/utils/api";
-import {Flex, Heading, Text} from "@chakra-ui/react";
+import {Flex, Heading} from "@chakra-ui/react";
 import {Menu} from "~/features/home/Menu";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
         <meta name="description" content="Knucklebones game" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex h="100vh" direction="column" justifyContent="center" alignItems="center" gap={8} m={8}>
+      <Flex h="100vh" direction="column" alignItems="center" gap={8} m={8}>
         <Menu />
         <Heading>Knucklebones</Heading>
         {/*<Text>*/}
