@@ -1,29 +1,17 @@
-import {Button, Flex} from "@chakra-ui/react";
-import Link from 'next/link'
+import {Flex, Link} from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export const Menu = () => {
     return (
         <Flex w="100%" justifyContent="space-between">
-            <Link href="/play">
-                <Button
-                    colorScheme="primary"
-                    variant="ghost">
-                    Play
-                </Button>
+            <Link as={NextLink} href="/">
+                Play
             </Link>
-            <Link href="/how-to-play">
-                <Button
-                    colorScheme="primary"
-                    variant="ghost">
-                    How to play
-                </Button>
+            <Link as={NextLink} href="/how-to-play">
+                How to play
             </Link>
-            <Link href="/ranking">
-                <Button
-                    colorScheme="primary"
-                    variant="ghost">
-                    Ranking
-                </Button>
+            <Link as={NextLink} href="/ranking">
+                Ranking
             </Link>
         </Flex>
     )
