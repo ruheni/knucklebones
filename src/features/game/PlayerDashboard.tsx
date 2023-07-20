@@ -2,6 +2,7 @@ import {Heading, Text, Flex, Button} from "@chakra-ui/react";
 import React from "react";
 import {DiceBoard} from "~/features/game/DiceBoard";
 import {PartialScore} from "~/features/game/PartialScore";
+import {PlayerInfos} from "~/features/game/PlayerInfos";
 
 interface Props {
     name: string;
@@ -9,29 +10,6 @@ interface Props {
     round: number;
     position?: "left" | "right";
 }
-
-interface PlayerInfosProps {
-    name: string;
-    round: number;
-    showDetails: boolean;
-    remainder: number;
-}
-
-const PlayerInfos = ({name, round, showDetails, remainder}: PlayerInfosProps) => (
-    <Flex direction="column" width="300px" maxWidth="300px" gap={2}>
-        {showDetails && (
-            <>
-                <Heading>{name}</Heading>
-                <Text>Score: calculate total score</Text>
-                <Button
-                    isDisabled={round % 2 === remainder}
-                    colorScheme="primary"
-                    alignSelf="start">Roll the dice
-                </Button>
-            </>
-        )}
-    </Flex>
-);
 
 export const PlayerDashboard = ({name, values, round, position = "left"}: Props) => (
     <Flex justifyContent="center" alignItems="center">
