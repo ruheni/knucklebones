@@ -1,11 +1,8 @@
 import Head from "next/head";
-// import { api } from "~/utils/api";
 import {Button, Flex, Heading, Input} from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function Home() {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>
@@ -27,10 +24,6 @@ export default function Home() {
                       borderRadius={8}>Start</Button>
               </NextLink>
           </Flex>
-        {/*<Text>*/}
-        {/*  {hello.data ? hello.data.greeting : "Loading tRPC query..."}*/}
-        {/*</Text>*/}
-        {/*<AuthShowcase />*/}
       </Flex>
     </>
   );
