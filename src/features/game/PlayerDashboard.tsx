@@ -21,7 +21,7 @@ export const PlayerDashboard = ({name, position = "left", values}: Props) => (
         </Flex>
         <Flex direction={position === "left" ? "column-reverse" : "column"}>
             <PartialScore values={values} />
-            <DiceBoard values={values} />
+            <DiceBoard values={values} name={name} />
         </Flex>
         <Flex direction="column" width="300px" maxWidth="300px">
             { position === "right" && (
