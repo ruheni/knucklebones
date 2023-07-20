@@ -1,4 +1,4 @@
-import {Heading, Text, Flex, Button} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import React from "react";
 import {DiceBoard} from "~/features/game/DiceBoard";
 import {PartialScore} from "~/features/game/PartialScore";
