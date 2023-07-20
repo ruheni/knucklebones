@@ -13,11 +13,21 @@ interface Props {
 
 export const PlayerDashboard = ({name, values, round, position = "left"}: Props) => (
     <Flex justifyContent="center" alignItems="center">
-        <PlayerInfos name={name} round={round} showDetails={position === "left"} remainder={1} />
+        <PlayerInfos
+            name={name}
+            round={round}
+            showDetails={position === "left"}
+            remainder={1}
+        />
         <Flex direction={position === "left" ? "column-reverse" : "column"}>
             <PartialScore values={values} />
             <DiceBoard values={values} name={name} />
         </Flex>
-        <PlayerInfos name={name} round={round} showDetails={position === "right"} remainder={0} />
+        <PlayerInfos
+            name={name}
+            round={round}
+            showDetails={position === "right"}
+            remainder={0}
+        />
     </Flex>
 );
