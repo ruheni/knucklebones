@@ -1,8 +1,28 @@
+import * as React from "react";
 import Head from "next/head";
-import {Button, Flex, Heading, Input} from "@chakra-ui/react";
-import NextLink from "next/link";
+import {Box, Flex} from "@chakra-ui/react";
+import {GameForm, type GameFormValues} from "~/features/game/GameForm";
+import {GameDashboard} from "~/features/game/GameDashboard";
+
+export interface Players {
+    playerOne: string;
+    playerTwo: string;
+}
 
 export default function Home() {
+  const [players, setPlayers] = React.useState<Players>();
+
+  const onSubmitHandler = (values: GameFormValues) => {
+    setPlayers(values);
+  }
+
+  const getContent = () => {
+      if (players) {
+          return <GameDashboard onQuit={() => setPlayers(undefined)} players={players} />
+      }
+      return <GameForm initialValues={{playerOne: "", playerTwo: ""}} onSubmit={(values) => onSubmitHandler(values)} />
+  }
+
   return (
     <>
       <Head>
@@ -10,21 +30,9 @@ export default function Home() {
         <meta name="description" content="Knucklebones game" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column" alignItems="center" gap={8} m={8}>
-        <Heading>Knucklebones</Heading>
-          <Flex gap={4} alignItems="center" w="50%" justifyContent="space-between">
-              <Flex direction="column" gap={2} flex={1}>
-                  <Input maxW="250px" placeholder="Player 1" />
-                  <Input maxW="250px" placeholder="Player 2" />
-              </Flex>
-              <NextLink href="/game">
-                  <Button
-                      colorScheme="primary"
-                      size="lg"
-                      borderRadius={8}>Start</Button>
-              </NextLink>
-          </Flex>
-      </Flex>
+      <Box m={8}>
+          {getContent()}
+      </Box>
     </>
   );
 }
