@@ -10,35 +10,36 @@ interface Props {
     position?: "left" | "right";
 }
 
+interface PlayerInfosProps {
+    name: string;
+    round: number;
+    showDetails: boolean;
+    remainder: number;
+}
+
+const PlayerInfos = ({name, round, showDetails, remainder}: PlayerInfosProps) => (
+    <Flex direction="column" width="300px" maxWidth="300px" gap={2}>
+        {showDetails && (
+            <>
+                <Heading>{name}</Heading>
+                <Text>Score: calculate total score</Text>
+                <Button
+                    isDisabled={round % 2 === remainder}
+                    colorScheme="primary"
+                    alignSelf="start">Roll the dice
+                </Button>
+            </>
+        )}
+    </Flex>
+);
+
 export const PlayerDashboard = ({name, values, round, position = "left"}: Props) => (
     <Flex justifyContent="center" alignItems="center">
-        <Flex direction="column" width="300px" maxWidth="300px" gap={2}>
-            {position === "left" && (
-                <>
-                    <Heading>{name}</Heading>
-                    <Text>Score: calculate total score</Text>
-                    <Button
-                        isDisabled={round % 2 === 1}
-                        colorScheme="primary"
-                        alignSelf="start">Roll the dice</Button>
-                </>
-            )}
-        </Flex>
+        <PlayerInfos name={name} round={round} showDetails={position === "left"} remainder={1} />
         <Flex direction={position === "left" ? "column-reverse" : "column"}>
             <PartialScore values={values} />
             <DiceBoard values={values} name={name} />
         </Flex>
-        <Flex direction="column" width="300px" maxWidth="300px" gap={2}>
-            { position === "right" && (
-                <>
-                    <Heading>{name}</Heading>
-                    <Text>Score: calculate total score</Text>
-                    <Button
-                        isDisabled={round % 2 === 0}
-                        colorScheme="primary"
-                        alignSelf="start">Roll the dice</Button>
-                </>
-            )}
-        </Flex>
+        <PlayerInfos name={name} round={round} showDetails={position === "right"} remainder={0} />
     </Flex>
 );
