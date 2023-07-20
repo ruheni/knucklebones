@@ -4,23 +4,39 @@ import {Box} from "@chakra-ui/react";
 import {GameForm, type GameFormValues} from "~/features/game/GameForm";
 import {GameDashboard} from "~/features/game/GameDashboard";
 
+export interface Player {
+    name: string;
+    values: number[];
+}
+
 export interface Players {
-    playerOne: string;
-    playerTwo: string;
+    playerOne: Player;
+    playerTwo: Player;
 }
 
 export default function Home() {
   const [players, setPlayers] = React.useState<Players>();
 
   const onSubmitHandler = (values: GameFormValues) => {
-    setPlayers(values);
+    setPlayers(() => ({
+        playerOne: {
+            name: values.playerOne,
+            values: Array.from({length: 9}, () => 0)
+        },
+        playerTwo: {
+            name: values.playerTwo,
+            values: Array.from({length: 9}, () => 0)
+        }
+    }))
   }
 
   const getContent = () => {
       if (players) {
           return <GameDashboard onQuit={() => setPlayers(undefined)} players={players} />
       }
-      return <GameForm initialValues={{playerOne: "Teo", playerTwo: "Noa"}} onSubmit={(values) => onSubmitHandler(values)} />
+      return <GameForm
+          initialValues={{playerOne: "Teo", playerTwo: "Noa"}}
+          onSubmit={(values) => onSubmitHandler(values)} />
   }
 
   return (

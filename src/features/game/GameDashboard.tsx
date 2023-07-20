@@ -7,12 +7,19 @@ interface Props {
     onQuit: () => void;
 }
 export const GameDashboard = ({onQuit, players}: Props) => {
+    const {name: namePlayerOne, values: valuesPlayerOne} = players.playerOne;
+    const {name: namePlayerTwo, values: valuesPlayerTwo} = players.playerTwo;
     return (
         <Stack>
             <Button onClick={onQuit} alignSelf="start">Quit game</Button>
-            <PlayerDashboard name={players.playerOne} score={10} values={[1,2,3,4,5,6,1,2,3]} />
+            <PlayerDashboard
+                name={namePlayerOne}
+                values={valuesPlayerOne} />
             <Divider />
-            <PlayerDashboard name={players.playerTwo} score={20} values={[0,0,0,0,0,0,0,0,0]} position="right"/>
+            <PlayerDashboard
+                name={namePlayerTwo}
+                values={valuesPlayerTwo}
+                position="right"/>
         </Stack>
     );
 }
