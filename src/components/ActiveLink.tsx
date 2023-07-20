@@ -11,6 +11,7 @@ function ActiveLink({ children, href }: Props) {
     const style = {
         marginRight: 10,
         color: router.asPath === href ? '#AF09F4' : 'black',
+        textDecoration: router.asPath === href ? 'underline' : 'none',
     }
 
     return (
