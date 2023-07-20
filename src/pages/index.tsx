@@ -1,6 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
-import {Box, Flex} from "@chakra-ui/react";
+import {Box} from "@chakra-ui/react";
 import {GameForm, type GameFormValues} from "~/features/game/GameForm";
 import {GameDashboard} from "~/features/game/GameDashboard";
 
@@ -20,7 +20,7 @@ export default function Home() {
       if (players) {
           return <GameDashboard onQuit={() => setPlayers(undefined)} players={players} />
       }
-      return <GameForm initialValues={{playerOne: "", playerTwo: ""}} onSubmit={(values) => onSubmitHandler(values)} />
+      return <GameForm initialValues={{playerOne: "Teo", playerTwo: "Noa"}} onSubmit={(values) => onSubmitHandler(values)} />
   }
 
   return (
