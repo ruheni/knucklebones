@@ -1,4 +1,4 @@
-import {Box, Button, Text, Stack, Flex} from "@chakra-ui/react";
+import {Box, Button, Text, Stack} from "@chakra-ui/react";
 import {type Players} from "~/pages";
 
 interface Props {
