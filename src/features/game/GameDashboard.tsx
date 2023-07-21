@@ -16,13 +16,15 @@ export const GameDashboard = ({ onQuit, players }: Props) => {
     <Stack>
       <Button onClick={onQuit} alignSelf="start">Quit game</Button>
       <PlayerDashboard
-        name={namePlayerOne}
+        playerName={namePlayerOne}
+        playerNumber="one"
         values={valuesPlayerOne}
         round={round}
       />
       <Divider />
       <PlayerDashboard
-        name={namePlayerTwo}
+        playerName={namePlayerTwo}
+        playerNumber="two"
         values={valuesPlayerTwo}
         round={round}
         position="right"
