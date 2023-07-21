@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import React from "react";
 import { DiceBoard } from "~/features/game/DiceBoard";
 import { PartialScore } from "~/features/game/PartialScore";
@@ -10,45 +10,24 @@ type Props = {
   playerNumber: PlayerNumber;
   values: number[];
   round: number;
-  position?: "left" | "right";
+  currentDie?: number;
+  onRollDieHandler: () => void;
 };
 
 export const PlayerBoard = ({
-  playerName, playerNumber, values, round, position = "left",
-}: Props) => {
-  const [dieValuePlayerOne, setDieValuePlayerOne] = React.useState<number>();
-  const [dieValuePlayerTwo, setDieValuePlayerTwo] = React.useState<number>();
-
-  const onRollDieHandler = (_playerNumber: PlayerNumber) => {
-    const newValue = Math.floor(Math.random() * 6) + 1;
-    if (_playerNumber === "one") {
-      setDieValuePlayerOne(newValue);
-    }
-    setDieValuePlayerTwo(newValue);
-  };
-
-  return (
-    <Flex justifyContent="center" alignItems="center">
-      <PlayerInfos
-        playerName={playerName}
-        round={round}
-        showDetails={position === "left"}
-        playerNumber={playerNumber}
-        dieValue={dieValuePlayerOne}
-        onRollDieHandler={onRollDieHandler}
-      />
-      <Flex direction={position === "left" ? "column-reverse" : "column"}>
-        <PartialScore values={values} />
-        <DiceBoard values={values} name={playerName} />
-      </Flex>
-      <PlayerInfos
-        playerName={playerName}
-        round={round}
-        showDetails={position === "right"}
-        playerNumber={playerNumber}
-        dieValue={dieValuePlayerTwo}
-        onRollDieHandler={onRollDieHandler}
-      />
+  playerName, playerNumber, values, round, currentDie, onRollDieHandler,
+}: Props) => (
+  <Stack direction="row" spacing={12}>
+    <Flex direction={playerNumber === "one" ? "column-reverse" : "column"}>
+      <PartialScore values={values} />
+      <DiceBoard values={values} name={playerName} />
     </Flex>
-  );
-};
+    <PlayerInfos
+      playerName={playerName}
+      round={round}
+      playerNumber={playerNumber}
+      dieValue={currentDie}
+      onRollDieHandler={onRollDieHandler}
+    />
+  </Stack>
+);

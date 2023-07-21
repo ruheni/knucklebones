@@ -11,24 +11,35 @@ export const GameDashboard = ({ onQuit, players }: Props) => {
   const { name: namePlayerOne, values: valuesPlayerOne } = players.playerOne;
   const { name: namePlayerTwo, values: valuesPlayerTwo } = players.playerTwo;
   const [round, setRound] = React.useState(0);
+  const [currentDie, setCurrentDie] = React.useState<number>();
+
+  const onRollDieHandler = () => {
+    const newValue = Math.floor(Math.random() * 6) + 1;
+    setCurrentDie(newValue);
+  };
 
   return (
-    <Stack>
+    <Stack direction="column" spacing={12}>
       <Button onClick={onQuit} alignSelf="start">Quit game</Button>
-      <PlayerBoard
-        playerName={namePlayerOne}
-        playerNumber="one"
-        values={valuesPlayerOne}
-        round={round}
-      />
-      <Divider />
-      <PlayerBoard
-        playerName={namePlayerTwo}
-        playerNumber="two"
-        values={valuesPlayerTwo}
-        round={round}
-        position="right"
-      />
+      <Stack direction="column" spacing={4}>
+        <PlayerBoard
+          playerName={namePlayerOne}
+          playerNumber="one"
+          values={valuesPlayerOne}
+          round={round}
+          currentDie={round % 2 === 0 ? currentDie : undefined}
+          onRollDieHandler={onRollDieHandler}
+        />
+        <Divider />
+        <PlayerBoard
+          playerName={namePlayerTwo}
+          playerNumber="two"
+          values={valuesPlayerTwo}
+          round={round}
+          currentDie={round % 2 === 1 ? currentDie : undefined}
+          onRollDieHandler={onRollDieHandler}
+        />
+      </Stack>
     </Stack>
   );
 };

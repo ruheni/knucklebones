@@ -3,16 +3,7 @@ import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import { GameForm, type GameFormValues } from "~/features/game/GameForm";
 import { GameDashboard } from "~/features/game/GameDashboard";
-
-export interface Player {
-  name: string;
-  values: number[];
-}
-
-export interface Players {
-  playerOne: Player;
-  playerTwo: Player;
-}
+import type { Players } from "~/features/game/types";
 
 const Home = () => {
   const [players, setPlayers] = React.useState<Players>();
