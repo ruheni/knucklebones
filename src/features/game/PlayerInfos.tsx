@@ -18,7 +18,7 @@ export const PlayerInfos = ({
   const remainder = playerNumber === "one" ? 1 : 0;
 
   return (
-    <Flex direction="column" width="300px" maxWidth="300px" gap={2}>
+    <Flex direction="column" width="400px" gap={2}>
       <Heading>{playerName}</Heading>
       <Text>Score: calculate total score</Text>
       <Button

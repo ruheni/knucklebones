@@ -1,4 +1,4 @@
-import { Flex, Stack } from "@chakra-ui/react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 import React from "react";
 import { DiceBoard } from "~/features/game/DiceBoard";
 import { PartialScore } from "~/features/game/PartialScore";
@@ -17,8 +17,9 @@ type Props = {
 export const PlayerBoard = ({
   playerName, playerNumber, values, round, currentDie, onRollDieHandler,
 }: Props) => (
-  <Stack direction="row" spacing={12}>
-    <Flex direction={playerNumber === "one" ? "column-reverse" : "column"}>
+  <Stack direction={playerNumber === "one" ? "row-reverse" : "row"} spacing={12} width="900px">
+    <Box width="400px" />
+    <Flex direction={playerNumber === "one" ? "column-reverse" : "column"} width="300px">
       <PartialScore values={values} />
       <DiceBoard values={values} name={playerName} />
     </Flex>

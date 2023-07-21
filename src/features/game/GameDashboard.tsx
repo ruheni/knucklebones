@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Divider, Stack } from "@chakra-ui/react";
-import { type Players } from "~/pages";
 import { PlayerBoard } from "~/features/game/PlayerBoard";
+import type { Players } from "~/features/game/types";
 
 interface Props {
   players: Players;
@@ -21,7 +21,7 @@ export const GameDashboard = ({ onQuit, players }: Props) => {
   return (
     <Stack direction="column" spacing={12}>
       <Button onClick={onQuit} alignSelf="start">Quit game</Button>
-      <Stack direction="column" spacing={4}>
+      <Stack direction="column" spacing={4} alignItems="center">
         <PlayerBoard
           playerName={namePlayerOne}
           playerNumber="one"
