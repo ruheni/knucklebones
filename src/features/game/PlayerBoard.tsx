@@ -13,7 +13,7 @@ type Props = {
   position?: "left" | "right";
 };
 
-export const PlayerDashboard = ({
+export const PlayerBoard = ({
   playerName, playerNumber, values, round, position = "left",
 }: Props) => {
   const [dieValuePlayerOne, setDieValuePlayerOne] = React.useState<number>();
