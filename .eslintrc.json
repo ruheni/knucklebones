@@ -1,0 +1,17 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "@fedeviotti/eslint-config",
+    "@fedeviotti/eslint-config/typescript",
+    "@fedeviotti/eslint-config/hooks",
+    "@fedeviotti/eslint-config/testing",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "warn"
+  }
+}
