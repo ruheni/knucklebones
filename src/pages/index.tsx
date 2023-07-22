@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react";
 import { GameForm, type GameFormValues } from "~/features/game/GameForm";
 import { GameDashboard } from "~/features/game/GameDashboard";
 import type { Players } from "~/features/game/types";
+import { GameProvider } from "~/features/game/GameContext";
 
 const Home = () => {
   const [players, setPlayers] = React.useState<Players>();
@@ -41,7 +42,9 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box m={8}>
-        {getContent()}
+        <GameProvider>
+          {getContent()}
+        </GameProvider>
       </Box>
     </>
   );

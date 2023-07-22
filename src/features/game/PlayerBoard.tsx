@@ -12,10 +12,11 @@ type Props = {
   round: number;
   currentDie?: number;
   onRollDieHandler: () => void;
+  player: number;
 };
 
 export const PlayerBoard = ({
-  playerName, playerNumber, values, round, currentDie, onRollDieHandler,
+  playerName, playerNumber, values, round, currentDie, onRollDieHandler, player,
 }: Props) => (
   <Stack direction={playerNumber === "one" ? "row-reverse" : "row"} spacing={12} width="900px">
     <Box width="400px" />
