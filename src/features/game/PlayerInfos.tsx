@@ -3,23 +3,23 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import type { PlayerNumber } from "~/features/game/types";
+import { useGame } from "~/features/game/GameContext";
 
 type Props = {
-  playerName: string;
-  round: number;
+  playerNumber: PlayerNumber;
   dieValue: number | undefined;
   onRollDieHandler: () => void;
-  playerNumber: PlayerNumber;
 };
 
 export const PlayerInfos = ({
-  playerName, round, dieValue, onRollDieHandler, playerNumber,
+  playerNumber, dieValue, onRollDieHandler,
 }: Props) => {
-  const remainder = playerNumber === "one" ? 1 : 0;
+  const { state: { players, round } } = useGame();
+  const remainder = playerNumber === 0 ? 1 : 0;
 
   return (
     <Flex direction="column" width="400px" gap={2}>
-      <Heading>{playerName}</Heading>
+      <Heading>{players[playerNumber]?.name}</Heading>
       <Text>Score: calculate total score</Text>
       <Button
         isDisabled={round % 2 === remainder || dieValue !== undefined}

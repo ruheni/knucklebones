@@ -1,16 +1,13 @@
 import * as React from "react";
 import { Button, Divider, Stack } from "@chakra-ui/react";
 import { PlayerBoard } from "~/features/game/PlayerBoard";
-import type { Players } from "~/features/game/types";
+import { useGame } from "~/features/game/GameContext";
 
 interface Props {
-  players: Players;
   onQuit: () => void;
 }
-export const GameDashboard = ({ onQuit, players }: Props) => {
-  const { name: namePlayerOne, values: valuesPlayerOne } = players.playerOne;
-  const { name: namePlayerTwo, values: valuesPlayerTwo } = players.playerTwo;
-  const [round, setRound] = React.useState(0);
+export const GameDashboard = ({ onQuit }: Props) => {
+  const { state: { players, round } } = useGame();
   const [currentDie, setCurrentDie] = React.useState<number>();
 
   const onRollDieHandler = () => {
@@ -23,23 +20,15 @@ export const GameDashboard = ({ onQuit, players }: Props) => {
       <Button onClick={onQuit} alignSelf="start">Quit game</Button>
       <Stack direction="column" spacing={4} alignItems="center">
         <PlayerBoard
-          playerName={namePlayerOne}
-          playerNumber="one"
-          values={valuesPlayerOne}
-          round={round}
+          playerNumber={0}
           currentDie={round % 2 === 0 ? currentDie : undefined}
           onRollDieHandler={onRollDieHandler}
-          player={0}
         />
         <Divider />
         <PlayerBoard
-          playerName={namePlayerTwo}
-          playerNumber="two"
-          values={valuesPlayerTwo}
-          round={round}
+          playerNumber={1}
           currentDie={round % 2 === 1 ? currentDie : undefined}
           onRollDieHandler={onRollDieHandler}
-          player={1}
         />
       </Stack>
     </Stack>
