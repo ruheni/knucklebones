@@ -29,3 +29,4 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 ## Things to do before you start
 - add .env file
+- add in the .npmrc file the following line: `//npm.pkg.github.com/:_authToken=[YOUR_GITHUB_TOKEN]` replacing [YOUR_GITHUB_TOKEN] with your github token
