@@ -7,12 +7,10 @@ import type { PlayerNumber } from "~/features/game/types";
 
 type Props = {
   playerNumber: PlayerNumber;
-  currentDie?: number;
-  onRollDieHandler: () => void;
 };
 
 export const PlayerBoard = ({
-  playerNumber, currentDie, onRollDieHandler,
+  playerNumber,
 }: Props) => (
   <Stack direction={playerNumber === 0 ? "row-reverse" : "row"} spacing={12} width="900px">
     <Box width="400px" />
@@ -22,8 +20,6 @@ export const PlayerBoard = ({
     </Flex>
     <PlayerInfos
       playerNumber={playerNumber}
-      dieValue={currentDie}
-      onRollDieHandler={onRollDieHandler}
     />
   </Stack>
 );

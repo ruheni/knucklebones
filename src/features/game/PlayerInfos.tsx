@@ -7,14 +7,12 @@ import { useGame } from "~/features/game/GameContext";
 
 type Props = {
   playerNumber: PlayerNumber;
-  dieValue: number | undefined;
-  onRollDieHandler: () => void;
 };
 
 export const PlayerInfos = ({
-  playerNumber, dieValue, onRollDieHandler,
+  playerNumber,
 }: Props) => {
-  const { state: { players, round } } = useGame();
+  const { state: { players, round }, dispatch } = useGame();
   const remainder = playerNumber === 0 ? 1 : 0;
 
   return (
@@ -22,10 +20,10 @@ export const PlayerInfos = ({
       <Heading>{players[playerNumber]?.name}</Heading>
       <Text>Score: calculate total score</Text>
       <Button
-        isDisabled={round % 2 === remainder || dieValue !== undefined}
+        isDisabled={round % 2 === remainder}
         colorScheme="primary"
         alignSelf="start"
-        onClick={onRollDieHandler}
+        onClick={() => dispatch({ type: "rollDie", payload: { playerNumber } })}
       >
         Roll the dice
       </Button>
@@ -39,7 +37,7 @@ export const PlayerInfos = ({
           borderWidth="1px"
           borderRadius="lg"
         >
-          {dieValue}
+          {(players[playerNumber]?.valueToPlace || 0) > 0 ? players[playerNumber]?.valueToPlace : "-"}
         </Flex>
       </HStack>
     </Flex>

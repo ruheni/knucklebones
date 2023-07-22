@@ -1,8 +1,14 @@
 import * as React from "react";
 import type { Player } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/GameForm";
+import { cloneDeep } from "lodash";
 
-type Action = { type: "addPlayers"; payload: GameFormValues } | { type: "positionDie" } | { type: "quitGame" } | { type: "addRound" };
+type Action =
+    { type: "addPlayers"; payload: GameFormValues } |
+    { type: "addRound" } |
+    { type: "quitGame" } |
+    { type: "rollDie"; payload: { playerNumber: number } } |
+    { type: "placeDie" };
 type Dispatch = (action: Action) => void;
 type State = { players: Player[]; round: number };
 type GameProviderProps = { children: React.ReactNode };
@@ -23,8 +29,16 @@ function gameReducer(state: State, action: Action) {
       return {
         ...state,
         players: [
-          { name: action.payload.playerOne, values: Array.from({ length: 9 }, () => 0) },
-          { name: action.payload.playerTwo, values: Array.from({ length: 9 }, () => 0) },
+          {
+            name: action.payload.playerOne,
+            values: Array.from({ length: 9 }, () => 0),
+            valueToPlace: 0,
+          },
+          {
+            name: action.payload.playerTwo,
+            values: Array.from({ length: 9 }, () => 0),
+            valueToPlace: 0,
+          },
         ],
       };
     }
@@ -34,8 +48,25 @@ function gameReducer(state: State, action: Action) {
     case "quitGame": {
       return INITIAL_STATE;
     }
+    case "rollDie": {
+      const newValue = Math.floor(Math.random() * 6) + 1;
+      const { playerNumber } = action.payload;
+      return {
+        ...state,
+        players: state.players.map((player, index) => {
+          if (index === playerNumber) {
+            return { ...cloneDeep(player), valueToPlace: newValue };
+          }
+          return player;
+        }),
+      };
+    }
+    case "placeDie": {
+      // clear the valueToPlace for current user
+      return state;
+    }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      return state;
     }
   }
 }
