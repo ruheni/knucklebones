@@ -35,7 +35,7 @@ export const GameBoard = ({ onQuit }: Props) => {
   return (
     <>
       <Stack direction="column" spacing={12}>
-        <Button onClick={onQuit} alignSelf="center" colorScheme={isGameOver ? "primary" : "default"}>Quit game</Button>
+        <Button onClick={onQuit} alignSelf="center" colorScheme={isGameOver ? "primary" : "gray"}>Quit game</Button>
         <Stack direction="column" spacing={4} alignItems="center">
           <PlayerBoard
             playerNumber={0}
