@@ -1,12 +1,12 @@
 import { Flex } from "@chakra-ui/react";
-import { usePlayerColumnsScore } from "~/features/game/hooks/usePlayerColumnsScore";
+import { usePlayerPartialScore } from "~/features/game/hooks/usePlayerPartialScore";
 
 type Props = {
   playerNumber: number;
 };
 
 export const PartialScore = ({ playerNumber }: Props) => {
-  const { column1Score, column2Score, column3Score } = usePlayerColumnsScore({ playerNumber });
+  const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerNumber });
 
   return (
     <Flex gap={4} px={8}>

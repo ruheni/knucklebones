@@ -5,7 +5,7 @@ type Props = {
   playerNumber: number;
 };
 
-export const usePlayerColumnsScore = ({ playerNumber }: Props) => {
+export const usePlayerPartialScore = ({ playerNumber }: Props) => {
   const { state: { players } } = useGame();
 
   const result = PARTIAL_SCORE_MAP.reduce((
