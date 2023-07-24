@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   Box,
-  Button, chakra,
+  Button,
   Divider,
   Modal,
   ModalBody,
