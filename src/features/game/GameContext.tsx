@@ -50,6 +50,7 @@ function gameReducer(state: State, action: Action) {
     }
     case "rollDie": {
       const newValue = Math.floor(Math.random() * 6) + 1;
+      // const newValue = 4;
       const { playerNumber } = action.payload;
       return {
         ...state,

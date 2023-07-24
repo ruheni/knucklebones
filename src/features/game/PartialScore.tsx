@@ -14,10 +14,20 @@ const PARTIAL_SCORE_MAP: Record<number, number[]> = {
 export const PartialScore = ({ playerNumber }: Props) => {
   const { state: { players } } = useGame();
   const calculatePartialScore = (column: number) => {
-    const cells = PARTIAL_SCORE_MAP[column] || [];
-    return (players[playerNumber]?.values[cells[0]!] || 0)
-      + (players[playerNumber]?.values[cells[1]!] || 0)
-      + (players[playerNumber]?.values[cells[2]!] || 0);
+    const columnCells = PARTIAL_SCORE_MAP[column] || [];
+
+    const result = columnCells.reduce((
+      acc,
+      cellIndex,
+    ) => {
+      const occurrences = players[playerNumber]?.values
+        .filter((v, i) => v !== 0 && columnCells.includes(i))
+        .filter((v) => v === players[playerNumber]?.values[cellIndex])
+        .length || 1;
+      return acc + ((players[playerNumber]?.values[cellIndex] || 0) * occurrences);
+    }, 0);
+
+    return result;
   };
 
   return (
