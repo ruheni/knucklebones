@@ -7,16 +7,22 @@ interface Props {
 }
 
 export const DiceBoard = ({ playerNumber }: Props) => {
-  const { state: { players } } = useGame();
-  const onClickHandler = (i: number) => {
-    console.log("click", i);
+  const { state: { players }, dispatch } = useGame();
+
+  const onClickHandler = (position: number) => {
+    dispatch({ type: "placeDie", payload: { playerNumber, position } });
+    dispatch({ type: "addRound" });
   };
 
   return (
     <Flex justifyContent="center" alignItems="center" px={8}>
       <SimpleGrid columns={3} row={3} spacing={4}>
         {players[playerNumber]?.values.map((value, index) => (
-          <Die key={crypto.randomUUID()} value={value} onClick={() => onClickHandler(index)} />
+          <Die
+            key={crypto.randomUUID()}
+            value={value}
+            onClick={() => onClickHandler(index)}
+          />
         ))}
       </SimpleGrid>
     </Flex>

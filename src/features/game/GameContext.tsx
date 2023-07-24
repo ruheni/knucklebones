@@ -8,7 +8,7 @@ type Action =
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie"; payload: { playerNumber: number } } |
-    { type: "placeDie" };
+    { type: "placeDie"; payload: { playerNumber: number; position: number } };
 type Dispatch = (action: Action) => void;
 type State = { players: Player[]; round: number };
 type GameProviderProps = { children: React.ReactNode };
@@ -62,8 +62,24 @@ function gameReducer(state: State, action: Action) {
       };
     }
     case "placeDie": {
-      // clear the valueToPlace for current user
-      return state;
+      const { playerNumber, position } = action.payload;
+      return {
+        ...state,
+        players: state.players.map((player, index) => {
+          if (index === playerNumber) {
+            return {
+              ...cloneDeep(player),
+              values: [
+                ...player.values.slice(0, position),
+                player.valueToPlace,
+                ...player.values.slice(position + 1),
+              ],
+              valueToPlace: 0,
+            };
+          }
+          return player;
+        }),
+      };
     }
     default: {
       return state;
