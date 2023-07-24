@@ -24,7 +24,10 @@ export const PlayerInfos = ({
         {`Total score: ${totalScore}`}
       </Text>
       <Button
-        isDisabled={round % 2 === remainder}
+        isDisabled={
+          round % 2 === remainder
+            || players.some((player) => player.values.every((value) => value !== 0))
+        }
         colorScheme="primary"
         alignSelf="start"
         onClick={() => dispatch({ type: "rollDie", payload: { playerNumber } })}
