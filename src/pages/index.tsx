@@ -1,6 +1,5 @@
 import * as React from "react";
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
 import { GameProvider } from "~/features/game/GameContext";
 import { Game } from "~/features/game/Game";
 
