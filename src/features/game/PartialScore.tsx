@@ -1,29 +1,12 @@
 import { Flex } from "@chakra-ui/react";
-import { useGame } from "~/features/game/GameContext";
-import { PARTIAL_SCORE_MAP } from "~/features/game/constant";
+import { usePlayerColumnsScore } from "~/features/game/hooks/usePlayerColumnsScore";
 
 type Props = {
   playerNumber: number;
 };
 
 export const PartialScore = ({ playerNumber }: Props) => {
-  const { state: { players } } = useGame();
-  const calculatePartialScore = (column: number) => {
-    const columnCells = PARTIAL_SCORE_MAP[column] || [];
-
-    const result = columnCells.reduce((
-      acc,
-      cellIndex,
-    ) => {
-      const occurrences = players[playerNumber]?.values
-        .filter((v, i) => v !== 0 && columnCells.includes(i))
-        .filter((v) => v === players[playerNumber]?.values[cellIndex])
-        .length || 1;
-      return acc + ((players[playerNumber]?.values[cellIndex] || 0) * occurrences);
-    }, 0);
-
-    return result;
-  };
+  const { column1Score, column2Score, column3Score } = usePlayerColumnsScore({ playerNumber });
 
   return (
     <Flex gap={4} px={8}>
@@ -33,7 +16,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {calculatePartialScore(0)}
+        {column1Score}
       </Flex>
       <Flex
         width="50px"
@@ -41,7 +24,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {calculatePartialScore(1)}
+        {column2Score}
       </Flex>
       <Flex
         width="50px"
@@ -49,7 +32,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {calculatePartialScore(2)}
+        {column3Score}
       </Flex>
     </Flex>
   );
