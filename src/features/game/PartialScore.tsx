@@ -1,14 +1,9 @@
 import { Flex } from "@chakra-ui/react";
 import { useGame } from "~/features/game/GameContext";
+import { PARTIAL_SCORE_MAP } from "~/features/game/constant";
 
 type Props = {
   playerNumber: number;
-};
-
-const PARTIAL_SCORE_MAP: Record<number, number[]> = {
-  0: [0, 3, 6],
-  1: [1, 4, 7],
-  2: [2, 5, 8],
 };
 
 export const PartialScore = ({ playerNumber }: Props) => {
