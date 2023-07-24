@@ -5,20 +5,20 @@ type Props = {
   playerNumber: number;
 };
 
+const PARTIAL_SCORE_MAP: Record<number, number[]> = {
+  0: [0, 3, 6],
+  1: [1, 4, 7],
+  2: [2, 5, 8],
+};
+
 export const PartialScore = ({ playerNumber }: Props) => {
   const { state: { players } } = useGame();
-
-  const partialScoreFirstColumn = (players[playerNumber]?.values[0] || 0)
-      + (players[playerNumber]?.values[3] || 0)
-      + (players[playerNumber]?.values[6] || 0);
-
-  const partialScoreSecondColumn = (players[playerNumber]?.values[0] || 0)
-        + (players[playerNumber]?.values[3] || 0)
-        + (players[playerNumber]?.values[6] || 0);
-
-  const partialScoreThirdColumn = (players[playerNumber]?.values[0] || 0)
-        + (players[playerNumber]?.values[3] || 0)
-        + (players[playerNumber]?.values[6] || 0);
+  const calculatePartialScore = (column: number) => {
+    const cells = PARTIAL_SCORE_MAP[column] || [];
+    return (players[playerNumber]?.values[cells[0]!] || 0)
+      + (players[playerNumber]?.values[cells[1]!] || 0)
+      + (players[playerNumber]?.values[cells[2]!] || 0);
+  };
 
   return (
     <Flex gap={4} px={8}>
@@ -28,7 +28,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {partialScoreFirstColumn}
+        {calculatePartialScore(0)}
       </Flex>
       <Flex
         width="50px"
@@ -36,7 +36,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {partialScoreSecondColumn}
+        {calculatePartialScore(1)}
       </Flex>
       <Flex
         width="50px"
@@ -44,7 +44,7 @@ export const PartialScore = ({ playerNumber }: Props) => {
         alignItems="center"
         justifyContent="center"
       >
-        {partialScoreThirdColumn}
+        {calculatePartialScore(2)}
       </Flex>
     </Flex>
   );
