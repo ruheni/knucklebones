@@ -10,8 +10,10 @@ export const DiceBoard = ({ playerNumber }: Props) => {
   const { state: { players }, dispatch } = useGame();
 
   const onClickHandler = (position: number) => {
-    dispatch({ type: "placeDie", payload: { playerNumber, position } });
-    dispatch({ type: "addRound" });
+    if (players[playerNumber]?.valueToPlace) {
+      dispatch({ type: "placeDie", payload: { playerNumber, position } });
+      dispatch({ type: "addRound" });
+    }
   };
 
   return (
@@ -22,6 +24,7 @@ export const DiceBoard = ({ playerNumber }: Props) => {
             key={crypto.randomUUID()}
             value={value}
             onClick={() => onClickHandler(index)}
+            isClickable={!!players[playerNumber]?.valueToPlace}
           />
         ))}
       </SimpleGrid>
