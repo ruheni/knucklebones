@@ -1,7 +1,8 @@
 import * as React from "react";
-import type { Player } from "~/features/game/types";
+import type { Player, PlayerNumber } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/GameForm";
 import { cloneDeep } from "lodash";
+import { getColumnByIndex } from "~/features/game/utils";
 
 type Action =
     { type: "addPlayers"; payload: GameFormValues } |
@@ -64,22 +65,35 @@ function gameReducer(state: State, action: Action) {
     }
     case "placeDie": {
       const { playerNumber, position } = action.payload;
+      const opponentPlayerNumber: PlayerNumber = playerNumber === 0 ? 1 : 0;
+
+      const activePlayer = {
+        ...state.players[playerNumber] as Player,
+        values: [
+          ...state.players[playerNumber]!.values.slice(0, position),
+          state.players[playerNumber]!.valueToPlace,
+          ...state.players[playerNumber]!.values.slice(position + 1),
+        ],
+        valueToPlace: 0,
+      };
+
+      const opponentPlayer = {
+        ...state.players[opponentPlayerNumber] as Player,
+        values: [
+          ...state.players[opponentPlayerNumber]!.values.map((value, i) => {
+            if (getColumnByIndex(i) === getColumnByIndex(position)) {
+              return (value === state.players[playerNumber]!.valueToPlace ? 0 : value);
+            }
+            return value;
+          }),
+        ],
+      };
+
       return {
         ...state,
-        players: state.players.map((player, index) => {
-          if (index === playerNumber) {
-            return {
-              ...cloneDeep(player),
-              values: [
-                ...player.values.slice(0, position),
-                player.valueToPlace,
-                ...player.values.slice(position + 1),
-              ],
-              valueToPlace: 0,
-            };
-          }
-          return player;
-        }),
+        players: playerNumber === 0
+          ? [activePlayer, opponentPlayer]
+          : [opponentPlayer, activePlayer],
       };
     }
     default: {
