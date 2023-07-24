@@ -4,6 +4,7 @@ import {
 import React from "react";
 import type { PlayerNumber } from "~/features/game/types";
 import { useGame } from "~/features/game/GameContext";
+import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
 
 type Props = {
   playerNumber: PlayerNumber;
@@ -13,12 +14,15 @@ export const PlayerInfos = ({
   playerNumber,
 }: Props) => {
   const { state: { players, round }, dispatch } = useGame();
+  const totalScore = usePlayerTotalScore({ playerNumber });
   const remainder = playerNumber === 0 ? 1 : 0;
 
   return (
     <Flex direction="column" width="400px" gap={2}>
       <Heading>{players[playerNumber]?.name}</Heading>
-      <Text>Score: calculate total score</Text>
+      <Text fontWeight="bold">
+        {`Total score: ${totalScore}`}
+      </Text>
       <Button
         isDisabled={round % 2 === remainder}
         colorScheme="primary"
