@@ -11,11 +11,9 @@ const Home = () => (
       <meta name="description" content="Knucklebones game" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Box m={8}>
-      <GameProvider>
-        <Game />
-      </GameProvider>
-    </Box>
+    <GameProvider>
+      <Game />
+    </GameProvider>
   </>
 );
 
