@@ -1,6 +1,7 @@
 import { Flex, SimpleGrid } from "@chakra-ui/react";
 import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
+import { api } from "~/utils/api";
 
 interface Props {
   playerNumber: number;
@@ -8,9 +9,18 @@ interface Props {
 
 export const DiceBoard = ({ playerNumber }: Props) => {
   const { state: { players }, dispatch } = useGame();
+  const addMove = api.game.addMove.useMutation();
 
   const onClickHandler = (position: number) => {
     if (players[playerNumber]?.valueToPlace) {
+      const opponentNumber = playerNumber === 0 ? 1 : 0;
+      addMove.mutate({
+        gameId: "clkh2by9500000j3q3dhl18r3",
+        player: players[playerNumber]?.name || "",
+        opponent: players[opponentNumber]?.name || "",
+        playerValues: players[playerNumber]?.values || Array(9).fill(0),
+        opponentValues: players[opponentNumber]?.values || Array(9).fill(0),
+      });
       dispatch({ type: "placeDie", payload: { playerNumber, position } });
       dispatch({ type: "addRound" });
     }
