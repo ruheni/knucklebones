@@ -1,12 +1,19 @@
 import {
   Heading, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
+  Spinner,
 } from "@chakra-ui/react";
 import * as React from "react";
 import Head from "next/head";
 import { api } from "~/utils/api";
+import NextLink from "next/link";
 
 const Ranking = () => {
   const getRanking = api.game.getRanking.useQuery();
+
+  if (getRanking.isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <Head>
@@ -34,7 +41,9 @@ const Ranking = () => {
                   <Td isNumeric>
                     {(((_sum.delta || 0) * 10) + (_count.winner || 0) * 10)}
                   </Td>
-                  <Td textAlign="end">History</Td>
+                  <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
+                    <Td textAlign="end">History</Td>
+                  </NextLink>
                 </Tr>
               ))}
             </Tbody>
