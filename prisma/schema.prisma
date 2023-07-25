@@ -82,4 +82,6 @@ model Game {
   player    String
   opponent  String
   moves     Move[]
+  winner    String?
+  score     Int?
 }
