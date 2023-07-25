@@ -2,6 +2,7 @@ import { Flex, SimpleGrid } from "@chakra-ui/react";
 import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
 import { api } from "~/utils/api";
+import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
 
 interface Props {
   playerNumber: number;
@@ -13,16 +14,24 @@ export const DiceBoard = ({ playerNumber }: Props) => {
 
   const onClickHandler = (position: number) => {
     if (players[playerNumber]?.valueToPlace) {
-      const opponentNumber = playerNumber === 0 ? 1 : 0;
+      const opponentPlayerNumber = playerNumber === 0 ? 1 : 0;
+      dispatch({ type: "placeDie", payload: { playerNumber, position } });
+      dispatch({ type: "addRound" });
       addMove.mutate({
         gameId,
         player: players[playerNumber]?.name || "",
-        opponent: players[opponentNumber]?.name || "",
-        playerValues: players[playerNumber]?.values || Array(9).fill(0),
-        opponentValues: players[opponentNumber]?.values || Array(9).fill(0),
+        opponent: players[opponentPlayerNumber]?.name || "",
+        playerValues: calculatePlayerUpdatedValues({
+          playerValues: players[playerNumber]?.values || Array(9).fill(0),
+          valueToPlace: players[playerNumber]?.valueToPlace || 0,
+          position,
+        }),
+        opponentValues: calculateOpponentUpdatedValues({
+          opponentValues: players[opponentPlayerNumber]?.values || Array(9).fill(0),
+          valueToPlace: players[playerNumber]?.valueToPlace || 0,
+          position,
+        }),
       });
-      dispatch({ type: "placeDie", payload: { playerNumber, position } });
-      dispatch({ type: "addRound" });
     }
   };
 
