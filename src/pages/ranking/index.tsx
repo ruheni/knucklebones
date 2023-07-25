@@ -32,9 +32,7 @@ const Ranking = () => {
                   <Td>{`# ${index + 1}`}</Td>
                   <Td>{winner}</Td>
                   <Td isNumeric>
-                    {((_sum.delta || 0) * 10)
-                      + (10 * _count.player)
-                      + (10 * _count.opponent)}
+                    {(((_sum.delta || 0) * 10) + (_count.winner || 0) * 10)}
                   </Td>
                   <Td textAlign="end">History</Td>
                 </Tr>
