@@ -2,7 +2,7 @@ import * as React from "react";
 import type { Player, PlayerNumber } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/GameForm";
 import { cloneDeep } from "lodash";
-import { getColumnByIndex } from "~/features/game/utils";
+import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
 
 type Action =
     { type: "startGame"; payload: GameFormValues & { gameId: string } } |
@@ -71,24 +71,21 @@ function gameReducer(state: State, action: Action) {
 
       const activePlayer = {
         ...state.players[playerNumber] as Player,
-        values: [
-          ...state.players[playerNumber]!.values.slice(0, position),
-          state.players[playerNumber]!.valueToPlace,
-          ...state.players[playerNumber]!.values.slice(position + 1),
-        ],
+        values: calculatePlayerUpdatedValues({
+          playerValues: state.players[playerNumber]!.values,
+          valueToPlace: state.players[playerNumber]!.valueToPlace,
+          position,
+        }),
         valueToPlace: 0,
       };
 
       const opponentPlayer = {
         ...state.players[opponentPlayerNumber] as Player,
-        values: [
-          ...state.players[opponentPlayerNumber]!.values.map((value, i) => {
-            if (getColumnByIndex(i) === getColumnByIndex(position)) {
-              return (value === state.players[playerNumber]!.valueToPlace ? 0 : value);
-            }
-            return value;
-          }),
-        ],
+        values: calculateOpponentUpdatedValues({
+          opponentValues: state.players[opponentPlayerNumber]!.values,
+          valueToPlace: state.players[playerNumber]!.valueToPlace,
+          position,
+        }),
       };
 
       return {
