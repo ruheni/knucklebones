@@ -1,8 +1,10 @@
+import * as React from "react";
 import { Flex, SimpleGrid } from "@chakra-ui/react";
 import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
 import { api } from "~/utils/api";
 import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
+import { useGameWinner } from "~/features/game/hooks/useGameWinner";
 
 interface Props {
   playerNumber: number;
@@ -10,30 +12,46 @@ interface Props {
 
 export const DiceBoard = ({ playerNumber }: Props) => {
   const { state: { players, gameId }, dispatch } = useGame();
+  const { winnerName, score } = useGameWinner();
   const addMove = api.game.addMove.useMutation();
+  const endGame = api.game.endGame.useMutation();
 
-  const onClickHandler = (position: number) => {
+  const onClickHandler = React.useCallback((position: number) => {
     if (players[playerNumber]?.valueToPlace) {
       const opponentPlayerNumber = playerNumber === 0 ? 1 : 0;
-      dispatch({ type: "placeDie", payload: { playerNumber, position } });
+      const calculatedPlayerValues = calculatePlayerUpdatedValues({
+        playerValues: players[playerNumber]?.values || Array(9).fill(0),
+        valueToPlace: players[playerNumber]?.valueToPlace || 0,
+        position,
+      });
+      const calculatedOpponentValues = calculateOpponentUpdatedValues({
+        opponentValues: players[opponentPlayerNumber]?.values || Array(9).fill(0),
+        valueToPlace: players[playerNumber]?.valueToPlace || 0,
+        position,
+      });
+      dispatch({
+        type: "placeDie",
+        payload: {
+          playerNumber, calculatedPlayerValues, calculatedOpponentValues,
+        },
+      });
       dispatch({ type: "addRound" });
       addMove.mutate({
         gameId,
         player: players[playerNumber]?.name || "",
         opponent: players[opponentPlayerNumber]?.name || "",
-        playerValues: calculatePlayerUpdatedValues({
-          playerValues: players[playerNumber]?.values || Array(9).fill(0),
-          valueToPlace: players[playerNumber]?.valueToPlace || 0,
-          position,
-        }),
-        opponentValues: calculateOpponentUpdatedValues({
-          opponentValues: players[opponentPlayerNumber]?.values || Array(9).fill(0),
-          valueToPlace: players[playerNumber]?.valueToPlace || 0,
-          position,
-        }),
+        playerValues: calculatedPlayerValues,
+        opponentValues: calculatedOpponentValues,
       });
+      if (calculatedPlayerValues.every((value) => value !== 0)) {
+        endGame.mutate({
+          gameId,
+          winner: winnerName,
+          score,
+        });
+      }
     }
-  };
+  }, [addMove, dispatch, endGame, gameId, playerNumber, players, score, winnerName]);
 
   return (
     <Flex justifyContent="center" alignItems="center" px={8}>

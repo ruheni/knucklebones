@@ -2,14 +2,21 @@ import * as React from "react";
 import type { Player, PlayerNumber } from "~/features/game/types";
 import type { GameFormValues } from "~/features/game/GameForm";
 import { cloneDeep } from "lodash";
-import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
 
 type Action =
-    { type: "startGame"; payload: GameFormValues & { gameId: string } } |
+    { type: "startGame";
+      payload: GameFormValues & { gameId: string }; } |
     { type: "addRound" } |
     { type: "quitGame" } |
-    { type: "rollDie"; payload: { playerNumber: number } } |
-    { type: "placeDie"; payload: { playerNumber: number; position: number } };
+    { type: "rollDie";
+      payload: { playerNumber: number }; } |
+    { type: "placeDie";
+      payload: {
+        playerNumber: number;
+        calculatedPlayerValues: number[];
+        calculatedOpponentValues: number[];
+      };
+    };
 type Dispatch = (action: Action) => void;
 type State = { players: Player[]; round: number; gameId: string };
 type GameProviderProps = { children: React.ReactNode };
@@ -33,12 +40,12 @@ function gameReducer(state: State, action: Action) {
         players: [
           {
             name: action.payload.playerOne,
-            values: Array.from({ length: 9 }, () => 0),
+            values: [2, 2, 2, 2, 2, 2, 2, 2, 0],
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
-            values: Array.from({ length: 9 }, () => 0),
+            values: [3, 3, 3, 3, 3, 3, 3, 3, 0],
             valueToPlace: 0,
           },
         ],
@@ -66,26 +73,20 @@ function gameReducer(state: State, action: Action) {
       };
     }
     case "placeDie": {
-      const { playerNumber, position } = action.payload;
+      const {
+        playerNumber, calculatedPlayerValues, calculatedOpponentValues,
+      } = action.payload;
       const opponentPlayerNumber: PlayerNumber = playerNumber === 0 ? 1 : 0;
 
       const activePlayer = {
         ...state.players[playerNumber] as Player,
-        values: calculatePlayerUpdatedValues({
-          playerValues: state.players[playerNumber]!.values,
-          valueToPlace: state.players[playerNumber]!.valueToPlace,
-          position,
-        }),
+        values: calculatedPlayerValues,
         valueToPlace: 0,
       };
 
       const opponentPlayer = {
         ...state.players[opponentPlayerNumber] as Player,
-        values: calculateOpponentUpdatedValues({
-          opponentValues: state.players[opponentPlayerNumber]!.values,
-          valueToPlace: state.players[playerNumber]!.valueToPlace,
-          position,
-        }),
+        values: calculatedOpponentValues,
       };
 
       return {
