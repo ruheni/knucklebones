@@ -30,4 +30,13 @@ export const gameRouter = createTRPCRouter({
         opponentValues: input.opponentValues.join(","),
       },
     })),
+  endGame: publicProcedure
+    .input(z.object({ gameId: z.string(), winner: z.string(), score: z.number() }))
+    .mutation(({ ctx, input }) => ctx.prisma.game.update({
+      where: { id: input.gameId },
+      data: {
+        winner: input.winner,
+        score: input.score,
+      },
+    })),
 });
