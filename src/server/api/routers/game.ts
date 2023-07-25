@@ -54,4 +54,25 @@ export const gameRouter = createTRPCRouter({
       _count: { winner: true },
       _sum: { delta: true },
     })),
+  getGamesByPlayer: publicProcedure
+    .input(z.object({
+      playerName: z.string(),
+    }))
+    .query(({ ctx, input }) => ctx.prisma.game.findMany({
+      where: {
+        OR: [
+          { player: { equals: input.playerName } },
+          { opponent: { equals: input.playerName } },
+        ],
+      },
+    })),
+  getMovesByGame: publicProcedure
+    .input(z.object({
+      gameId: z.string(),
+    }))
+    .query(({ ctx, input }) => ctx.prisma.move.findMany({
+      where: {
+        gameId: input.gameId,
+      },
+    })),
 });
