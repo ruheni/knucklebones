@@ -7,7 +7,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.1.5",
