@@ -31,7 +31,11 @@ const Ranking = () => {
                 <Tr key={crypto.randomUUID()}>
                   <Td>{`# ${index + 1}`}</Td>
                   <Td>{winner}</Td>
-                  <Td isNumeric>{(_sum.score || 0) + (10 * _count.winner)}</Td>
+                  <Td isNumeric>
+                    {((_sum.delta || 0) * 10)
+                      + (10 * _count.player)
+                      + (10 * _count.opponent)}
+                  </Td>
                   <Td textAlign="end">History</Td>
                 </Tr>
               ))}

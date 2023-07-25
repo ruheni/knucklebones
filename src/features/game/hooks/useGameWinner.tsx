@@ -11,12 +11,18 @@ export const useGameWinner = () => {
   if (isGameOver) {
     return {
       winnerName: (playerScore > opponentScore ? players[0]?.name : players[1]?.name) || "Player",
-      score: playerScore > opponentScore ? playerScore : opponentScore,
+      score: playerScore > opponentScore
+        ? playerScore
+        : opponentScore,
+      delta: playerScore > opponentScore
+        ? playerScore - opponentScore
+        : opponentScore - playerScore,
     };
   }
 
   return {
     winnerName: "",
     score: 0,
+    delta: 0,
   };
 };

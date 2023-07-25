@@ -31,19 +31,22 @@ export const gameRouter = createTRPCRouter({
       },
     })),
   endGame: publicProcedure
-    .input(z.object({ gameId: z.string(), winner: z.string(), score: z.number() }))
+    .input(z.object({
+      gameId: z.string(), winner: z.string(), score: z.number(), delta: z.number(),
+    }))
     .mutation(({ ctx, input }) => ctx.prisma.game.update({
       where: { id: input.gameId },
       data: {
         winner: input.winner,
         score: input.score,
+        delta: input.delta,
       },
     })),
   getRanking: publicProcedure
     .query(({ ctx }) => ctx.prisma.game.groupBy({
-      by: ["winner"],
-      _count: { winner: true },
-      _sum: { score: true },
+      by: ["winner", "player", "opponent"],
+      _count: { player: true, opponent: true },
+      _sum: { delta: true },
       orderBy: { _sum: { score: "desc" } },
     })),
 });

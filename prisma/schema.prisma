@@ -84,4 +84,5 @@ model Game {
   moves     Move[]
   winner    String?
   score     Int?
+  delta     Int?
 }

@@ -27,7 +27,7 @@ interface Props {
 export const GameBoard = ({ onQuit }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { gameId, isGameOver } = useGameOver();
-  const { winnerName, score } = useGameWinner();
+  const { winnerName, score, delta } = useGameWinner();
   const endGame = api.game.endGame.useMutation();
 
   React.useEffect(() => {
@@ -41,6 +41,7 @@ export const GameBoard = ({ onQuit }: Props) => {
       gameId,
       winner: winnerName,
       score,
+      delta,
     });
     onClose();
     onQuit();
