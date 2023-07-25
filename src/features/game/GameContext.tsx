@@ -40,12 +40,12 @@ function gameReducer(state: State, action: Action) {
         players: [
           {
             name: action.payload.playerOne,
-            values: [2, 2, 2, 2, 2, 2, 2, 2, 0],
+            values: [3, 3, 3, 3, 3, 3, 3, 3, 0],
             valueToPlace: 0,
           },
           {
             name: action.payload.playerTwo,
-            values: [3, 3, 3, 3, 3, 3, 3, 3, 0],
+            values: [2, 2, 2, 2, 2, 2, 2, 2, 0],
             valueToPlace: 0,
           },
         ],
