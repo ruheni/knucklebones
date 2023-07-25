@@ -4,7 +4,6 @@ import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
 import { api } from "~/utils/api";
 import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
-import { useGameWinner } from "~/features/game/hooks/useGameWinner";
 
 interface Props {
   playerNumber: number;
@@ -12,9 +11,7 @@ interface Props {
 
 export const DiceBoard = ({ playerNumber }: Props) => {
   const { state: { players, gameId }, dispatch } = useGame();
-  const { winnerName, score } = useGameWinner();
   const addMove = api.game.addMove.useMutation();
-  const endGame = api.game.endGame.useMutation();
 
   const onClickHandler = React.useCallback((position: number) => {
     if (players[playerNumber]?.valueToPlace) {
@@ -43,15 +40,8 @@ export const DiceBoard = ({ playerNumber }: Props) => {
         playerValues: calculatedPlayerValues,
         opponentValues: calculatedOpponentValues,
       });
-      if (calculatedPlayerValues.every((value) => value !== 0)) {
-        endGame.mutate({
-          gameId,
-          winner: winnerName,
-          score,
-        });
-      }
     }
-  }, [addMove, dispatch, endGame, gameId, playerNumber, players, score, winnerName]);
+  }, [addMove, dispatch, gameId, playerNumber, players]);
 
   return (
     <Flex justifyContent="center" alignItems="center" px={8}>

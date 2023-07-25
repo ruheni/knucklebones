@@ -18,6 +18,7 @@ import { PlayerBoard } from "~/features/game/PlayerBoard";
 import { useGameOver } from "~/features/game/hooks/useGameOver";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGameWinner } from "~/features/game/hooks/useGameWinner";
+import { api } from "~/utils/api";
 
 interface Props {
   onQuit: () => void;
@@ -25,14 +26,25 @@ interface Props {
 
 export const GameBoard = ({ onQuit }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isGameOver } = useGameOver();
-  const { winnerName } = useGameWinner();
+  const { gameId, isGameOver } = useGameOver();
+  const { winnerName, score } = useGameWinner();
+  const endGame = api.game.endGame.useMutation();
 
   React.useEffect(() => {
     if (isGameOver) {
       onOpen();
     }
   }, [isGameOver, onOpen]);
+
+  const onCloseHandler = React.useCallback(() => {
+    endGame.mutate({
+      gameId,
+      winner: winnerName,
+      score,
+    });
+    onClose();
+    onQuit();
+  }, [endGame, gameId, onClose, onQuit, score, winnerName]);
 
   return (
     <>
@@ -59,7 +71,7 @@ export const GameBoard = ({ onQuit }: Props) => {
         >
           <Modal
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={onCloseHandler}
           >
             <ModalOverlay />
             <ModalContent>
@@ -72,7 +84,7 @@ export const GameBoard = ({ onQuit }: Props) => {
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme="primary" mr={3} onClick={onClose}>
+                <Button colorScheme="primary" mr={3} onClick={onCloseHandler}>
                   Close
                 </Button>
               </ModalFooter>
