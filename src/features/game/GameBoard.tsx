@@ -45,7 +45,7 @@ export const GameBoard = ({ onQuit }: Props) => {
     });
     onClose();
     onQuit();
-  }, [endGame, gameId, onClose, onQuit, score, winnerName]);
+  }, [delta, endGame, gameId, onClose, onQuit, score, winnerName]);
 
   return (
     <>
