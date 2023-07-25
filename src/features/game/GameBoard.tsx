@@ -17,6 +17,7 @@ import {
 import { PlayerBoard } from "~/features/game/PlayerBoard";
 import { useGameOver } from "~/features/game/hooks/useGameOver";
 import { AnimatePresence, motion } from "framer-motion";
+import { useGameWinner } from "~/features/game/hooks/useGameWinner";
 
 interface Props {
   onQuit: () => void;
@@ -24,7 +25,8 @@ interface Props {
 
 export const GameBoard = ({ onQuit }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isGameOver, winnerName } = useGameOver();
+  const { isGameOver } = useGameOver();
+  const { winnerName } = useGameWinner();
 
   React.useEffect(() => {
     if (isGameOver) {
