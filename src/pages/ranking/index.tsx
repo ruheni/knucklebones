@@ -27,11 +27,11 @@ const Ranking = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {getRanking.data?.map(({ winner, _sum }, index) => (
+              {getRanking.data?.map(({ winner, _sum, _count }, index) => (
                 <Tr key={crypto.randomUUID()}>
                   <Td>{`# ${index + 1}`}</Td>
                   <Td>{winner}</Td>
-                  <Td isNumeric>{_sum.score}</Td>
+                  <Td isNumeric>{(_sum.score || 0) + (10 * _count.winner)}</Td>
                   <Td textAlign="end">History</Td>
                 </Tr>
               ))}
