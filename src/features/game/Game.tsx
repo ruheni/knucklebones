@@ -7,18 +7,16 @@ import { api } from "~/utils/api";
 
 export const Game = () => {
   const { state: { players }, dispatch } = useGame();
-  const startGame = api.game.startGame.useMutation({
-    onSuccess: (data) => {
-      console.log("data", data);
-      // save data.id on the context to pass it to addMove.mutate
-    },
-  });
+  const startGame = api.game.startGame.useMutation();
   const onSubmitHandler = async (values: GameFormValues) => {
     startGame.mutate({
       player: values.playerOne,
       opponent: values.playerTwo,
+    }, {
+      onSuccess: (data) => {
+        dispatch({ type: "startGame", payload: { ...values, gameId: data.id } });
+      },
     });
-    dispatch({ type: "addPlayers", payload: values });
   };
 
   if (players.length === 2) {

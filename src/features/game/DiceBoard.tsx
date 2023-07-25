@@ -8,14 +8,14 @@ interface Props {
 }
 
 export const DiceBoard = ({ playerNumber }: Props) => {
-  const { state: { players }, dispatch } = useGame();
+  const { state: { players, gameId }, dispatch } = useGame();
   const addMove = api.game.addMove.useMutation();
 
   const onClickHandler = (position: number) => {
     if (players[playerNumber]?.valueToPlace) {
       const opponentNumber = playerNumber === 0 ? 1 : 0;
       addMove.mutate({
-        gameId: "clkh2by9500000j3q3dhl18r3",
+        gameId,
         player: players[playerNumber]?.name || "",
         opponent: players[opponentNumber]?.name || "",
         playerValues: players[playerNumber]?.values || Array(9).fill(0),

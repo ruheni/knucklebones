@@ -5,13 +5,13 @@ import { cloneDeep } from "lodash";
 import { getColumnByIndex } from "~/features/game/utils";
 
 type Action =
-    { type: "addPlayers"; payload: GameFormValues } |
+    { type: "startGame"; payload: GameFormValues & { gameId: string } } |
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie"; payload: { playerNumber: number } } |
     { type: "placeDie"; payload: { playerNumber: number; position: number } };
 type Dispatch = (action: Action) => void;
-type State = { players: Player[]; round: number };
+type State = { players: Player[]; round: number; gameId: string };
 type GameProviderProps = { children: React.ReactNode };
 
 const GameContext = React.createContext<{
@@ -22,11 +22,12 @@ const GameContext = React.createContext<{
 const INITIAL_STATE: State = {
   players: [],
   round: 0,
+  gameId: "",
 };
 
 function gameReducer(state: State, action: Action) {
   switch (action.type) {
-    case "addPlayers": {
+    case "startGame": {
       return {
         ...state,
         players: [
@@ -41,6 +42,7 @@ function gameReducer(state: State, action: Action) {
             valueToPlace: 0,
           },
         ],
+        gameId: action.payload.gameId,
       };
     }
     case "addRound": {
