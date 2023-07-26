@@ -5,6 +5,11 @@ import { GameBoard } from "~/features/game/GameBoard";
 import * as React from "react";
 import { api } from "~/utils/api";
 
+const INITIAL_VALUES = {
+  playerOne: "",
+  playerTwo: "",
+};
+
 export const Game = () => {
   const { state: { players }, dispatch } = useGame();
   const startGame = api.game.startGame.useMutation();
@@ -25,7 +30,7 @@ export const Game = () => {
 
   return (
     <GameForm
-      initialValues={{ playerOne: "Teo", playerTwo: "Noa" }}
+      initialValues={INITIAL_VALUES}
       onSubmit={(values) => onSubmitHandler(values)}
     />
   );
