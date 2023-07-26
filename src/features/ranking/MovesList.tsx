@@ -12,7 +12,7 @@ type MoveDetailBlockProps = {
   score: number;
 };
 const MoveDetailBlock = ({ name, values, score }: MoveDetailBlockProps) => (
-  <Stack direction="row" w="100%" justifyContent="space-between">
+  <Stack direction="row" w="100%" justifyContent="space-between" fontSize="lg">
     <Text width="150px" noOfLines={1}>{name}</Text>
     <Text width="230px" letterSpacing={1} fontFamily="monospace">{formatValues(values)}</Text>
     <Text>{" = "}</Text>
@@ -42,13 +42,11 @@ export const MovesList = ({ gameId, playerName }: Props) => {
       {getMoves.data?.map(({
         id, player, opponent, playerValues, opponentValues, playerScore, opponentScore,
       }) => (
-        <Text key={id} fontSize="lg">
-          <Flex direction={playerName === player ? "row" : "row-reverse"} justifyContent="center">
-            <MoveDetailBlock name={player} values={playerValues} score={playerScore} />
-            <Text pr={8}>{" - "}</Text>
-            <MoveDetailBlock name={opponent} values={opponentValues} score={opponentScore} />
-          </Flex>
-        </Text>
+        <Flex key={id} direction={playerName === player ? "row" : "row-reverse"} justifyContent="center">
+          <MoveDetailBlock name={player} values={playerValues} score={playerScore} />
+          <Text pr={8}>{" - "}</Text>
+          <MoveDetailBlock name={opponent} values={opponentValues} score={opponentScore} />
+        </Flex>
       ))}
     </Stack>
   );
