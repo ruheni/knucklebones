@@ -72,6 +72,8 @@ model Move {
   opponent       String
   playerValues   String
   opponentValues String
+  playerScore    Int
+  opponentScore  Int
   Game           Game?    @relation(fields: [gameId], references: [id])
   gameId         String?
 }
