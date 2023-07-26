@@ -20,6 +20,8 @@ export const gameRouter = createTRPCRouter({
       opponent: z.string(),
       playerValues: z.array(z.number()),
       opponentValues: z.array(z.number()),
+      playerScore: z.number(),
+      opponentScore: z.number(),
     }))
     .mutation(({ ctx, input }) => ctx.prisma.move.create({
       data: {
@@ -28,6 +30,8 @@ export const gameRouter = createTRPCRouter({
         opponent: input.opponent,
         playerValues: input.playerValues.join(","),
         opponentValues: input.opponentValues.join(","),
+        playerScore: input.playerScore,
+        opponentScore: input.opponentScore,
       },
     })),
   endGame: publicProcedure
