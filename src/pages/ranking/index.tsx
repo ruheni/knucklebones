@@ -6,6 +6,7 @@ import * as React from "react";
 import Head from "next/head";
 import { api } from "~/utils/api";
 import NextLink from "next/link";
+import { TotalScore } from "~/features/ranking/TotalScore";
 
 const Ranking = () => {
   const getRanking = api.game.getRanking.useQuery();
@@ -32,12 +33,12 @@ const Ranking = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {getRanking.data?.map(({ winner, _sum, _count }, index) => (
+            {getRanking.data?.map(({ winner, _sum }, index) => (
               <Tr key={crypto.randomUUID()}>
                 <Td>{`# ${index + 1}`}</Td>
                 <Td>{winner}</Td>
                 <Td isNumeric>
-                  {(((_sum.delta || 0) * 10) + ((_count.player + _count.opponent) || 0) * 10)}
+                  <TotalScore playerName={winner || ""} delta={_sum.delta || 0} />
                 </Td>
                 <Td textAlign="end">
                   <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
