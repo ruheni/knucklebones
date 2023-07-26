@@ -14,6 +14,13 @@ const History = () => {
     playerName: playerName as string,
   });
 
+  const calculateGameScore = (delta: number, winner: string) => {
+    if (winner === playerName) {
+      return ((delta || 0) * 10) + 10;
+    }
+    return 10;
+  };
+
   const getContent = () => {
     if (getGames.isLoading) {
       return (
@@ -26,10 +33,12 @@ const History = () => {
     }
     return (
       getGames.data?.map(({
-        id, player, opponent,
+        id, player, opponent, delta, winner,
       }) => (
         <Stack key={id}>
-          <Text fontSize="2xl">{`vs. ${player === playerName ? opponent : player}`}</Text>
+          <Text fontSize="2xl">
+            {`vs. ${player === playerName ? opponent : player}: ${calculateGameScore(delta || 0, winner || "")}`}
+          </Text>
           <MovesList gameId={id} />
         </Stack>
       ))
@@ -39,8 +48,8 @@ const History = () => {
   return (
     <>
       <Head>
-        <title>Index</title>
-        <meta name="description" content="Index" />
+        <title>{`${playerName}'s History`}</title>
+        <meta name="description" content={`${playerName}'s History`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Stack spacing={16}>
