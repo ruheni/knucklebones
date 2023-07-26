@@ -1,13 +1,30 @@
 import * as React from "react";
 import { api } from "~/utils/api";
 import {
+  Flex,
   Skeleton, Stack, Text,
 } from "@chakra-ui/react";
+import { formatValues } from "~/features/ranking/utils";
+
+type MoveDetailBlockProps = {
+  name: string;
+  values: string;
+  score: number;
+};
+const MoveDetailBlock = ({ name, values, score }: MoveDetailBlockProps) => (
+  <Stack direction="row" w="100%" justifyContent="space-between">
+    <Text width="150px" noOfLines={1}>{name}</Text>
+    <Text width="230px" letterSpacing={1} fontFamily="monospace">{formatValues(values)}</Text>
+    <Text>{" = "}</Text>
+    <Text width="50px">{score}</Text>
+  </Stack>
+);
 
 type Props = {
   gameId: string;
+  playerName: string;
 };
-export const MovesList = ({ gameId }: Props) => {
+export const MovesList = ({ gameId, playerName }: Props) => {
   const getMoves = api.game.getMovesByGame.useQuery({ gameId });
 
   if (getMoves.isLoading) {
@@ -23,11 +40,15 @@ export const MovesList = ({ gameId }: Props) => {
   return (
     <Stack>
       {getMoves.data?.map(({
-        id, player, opponent, playerValues, opponentValues,
+        id, player, opponent, playerValues, opponentValues, playerScore, opponentScore,
       }) => (
-        <Stack key={id}>
-          <Text fontSize="lg">{`${player} ${playerValues} = 0 - ${opponent} ${opponentValues} = 0`}</Text>
-        </Stack>
+        <Text key={id} fontSize="lg">
+          <Flex direction={playerName === player ? "row" : "row-reverse"} justifyContent="center">
+            <MoveDetailBlock name={player} values={playerValues} score={playerScore} />
+            <Text pr={8}>{" - "}</Text>
+            <MoveDetailBlock name={opponent} values={opponentValues} score={opponentScore} />
+          </Flex>
+        </Text>
       ))}
     </Stack>
   );
