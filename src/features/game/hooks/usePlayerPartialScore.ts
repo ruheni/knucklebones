@@ -10,7 +10,5 @@ export const usePlayerPartialScore = ({ playerNumber }: Props) => {
   const { state: { players } } = useGame();
   const values = players[playerNumber]?.values || [];
 
-  const partialScores = calculatePartialScore({ values });
-
-  return partialScores;
+  return calculatePartialScore({ values });
 };
