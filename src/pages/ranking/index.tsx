@@ -1,6 +1,6 @@
 import {
   Heading, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
-  Spinner,
+  Skeleton,
 } from "@chakra-ui/react";
 import * as React from "react";
 import Head from "next/head";
@@ -10,9 +10,47 @@ import NextLink from "next/link";
 const Ranking = () => {
   const getRanking = api.game.getRanking.useQuery();
 
-  if (getRanking.isLoading) {
-    return <Spinner />;
-  }
+  const getContent = () => {
+    if (getRanking.isLoading) {
+      return (
+        <Stack>
+          <Skeleton height="53px" />
+          <Skeleton height="53px" />
+          <Skeleton height="53px" />
+        </Stack>
+      );
+    }
+    return (
+      <TableContainer>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>#</Th>
+              <Th>Player</Th>
+              <Th isNumeric>Score</Th>
+              <Th />
+            </Tr>
+          </Thead>
+          <Tbody>
+            {getRanking.data?.map(({ winner, _sum, _count }, index) => (
+              <Tr key={crypto.randomUUID()}>
+                <Td>{`# ${index + 1}`}</Td>
+                <Td>{winner}</Td>
+                <Td isNumeric>
+                  {(((_sum.delta || 0) * 10) + (_count.winner || 0) * 10)}
+                </Td>
+                <Td textAlign="end">
+                  <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
+                    History
+                  </NextLink>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    );
+  };
 
   return (
     <>
@@ -23,32 +61,7 @@ const Ranking = () => {
       </Head>
       <Stack spacing={16}>
         <Heading alignSelf="center">Ranking</Heading>
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>#</Th>
-                <Th>Player</Th>
-                <Th isNumeric>Score</Th>
-                <Th />
-              </Tr>
-            </Thead>
-            <Tbody>
-              {getRanking.data?.map(({ winner, _sum, _count }, index) => (
-                <Tr key={crypto.randomUUID()}>
-                  <Td>{`# ${index + 1}`}</Td>
-                  <Td>{winner}</Td>
-                  <Td isNumeric>
-                    {(((_sum.delta || 0) * 10) + (_count.winner || 0) * 10)}
-                  </Td>
-                  <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
-                    <Td textAlign="end">History</Td>
-                  </NextLink>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+        {getContent()}
       </Stack>
     </>
   );

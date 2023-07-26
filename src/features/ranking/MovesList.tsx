@@ -1,6 +1,8 @@
 import * as React from "react";
 import { api } from "~/utils/api";
-import { Box, Spinner, Stack } from "@chakra-ui/react";
+import {
+  Box, Skeleton, Stack,
+} from "@chakra-ui/react";
 
 type Props = {
   gameId: string;
@@ -9,8 +11,15 @@ export const MovesList = ({ gameId }: Props) => {
   const getMoves = api.game.getMovesByGame.useQuery({ gameId });
 
   if (getMoves.isLoading) {
-    return <Spinner />;
+    return (
+      <Stack>
+        <Skeleton height="24px" />
+        <Skeleton height="24px" />
+        <Skeleton height="24px" />
+      </Stack>
+    );
   }
+
   return (
     <Stack>
       {getMoves.data?.map(({

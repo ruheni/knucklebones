@@ -2,7 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import {
   Button,
-  Heading, Spinner, Stack, Text,
+  Heading, Skeleton, Stack, Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
@@ -14,9 +14,27 @@ const History = () => {
     playerName: playerName as string,
   });
 
-  if (getGames.isLoading) {
-    return <Spinner />;
-  }
+  const getContent = () => {
+    if (getGames.isLoading) {
+      return (
+        <>
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+        </>
+      );
+    }
+    return (
+      getGames.data?.map(({
+        id, player, opponent,
+      }) => (
+        <Stack key={id}>
+          <Text fontSize="2xl">{`vs. ${player === playerName ? opponent : player}`}</Text>
+          <MovesList gameId={id} />
+        </Stack>
+      ))
+    );
+  };
 
   return (
     <>
@@ -29,14 +47,7 @@ const History = () => {
         <Button onClick={back} alignSelf="center">Back to ranking</Button>
         <Heading alignSelf="center">{`${playerName}'s History`}</Heading>
         <Stack spacing={12}>
-          {getGames.data?.map(({
-            id, player, opponent,
-          }) => (
-            <Stack key={id}>
-              <Text fontSize="2xl">{`vs. ${player === playerName ? opponent : player}`}</Text>
-              <MovesList gameId={id} />
-            </Stack>
-          ))}
+          {getContent()}
         </Stack>
       </Stack>
     </>
