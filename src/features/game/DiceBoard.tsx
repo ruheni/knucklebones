@@ -3,8 +3,9 @@ import { Flex, SimpleGrid } from "@chakra-ui/react";
 import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
 import { api } from "~/utils/api";
-import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
 import { calculateTotalScore } from "~/features/game/utils/calculateTotalScore";
+import { calculatePlayerUpdatedValues } from "~/features/game/utils/calculatePlayerUpdatedValues";
+import { calculateOpponentUpdatedValues } from "~/features/game/utils/calculateOpponentUpdatedValues";
 
 interface Props {
   playerNumber: number;
