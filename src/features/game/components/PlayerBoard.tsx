@@ -2,7 +2,7 @@ import { Box, Flex, Stack } from "@chakra-ui/react";
 import React from "react";
 import { DiceBoard } from "~/features/game/components/DiceBoard";
 import { PartialScore } from "~/features/game/components/PartialScore";
-import { PlayerInfos } from "~/features/game/components/PlayerInfos";
+import { PlayerConsole } from "~/features/game/components/PlayerConsole";
 import type { PlayerNumber } from "~/features/game/types";
 
 type Props = {
@@ -18,7 +18,7 @@ export const PlayerBoard = ({
       <PartialScore playerNumber={playerNumber} />
       <DiceBoard playerNumber={playerNumber} />
     </Flex>
-    <PlayerInfos
+    <PlayerConsole
       playerNumber={playerNumber}
     />
   </Stack>

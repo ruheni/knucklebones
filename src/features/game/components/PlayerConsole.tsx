@@ -10,7 +10,7 @@ type Props = {
   playerNumber: PlayerNumber;
 };
 
-export const PlayerInfos = ({
+export const PlayerConsole = ({
   playerNumber,
 }: Props) => {
   const { state: { players, round }, dispatch } = useGame();
