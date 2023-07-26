@@ -28,7 +28,7 @@ export const AuthShowcase = () => {
         )}
       </Text>
       <Button
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
+        onClick={sessionData ? () => signOut() : () => signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
       </Button>
