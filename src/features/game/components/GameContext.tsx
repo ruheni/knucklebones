@@ -9,10 +9,10 @@ type Action =
     { type: "addRound" } |
     { type: "quitGame" } |
     { type: "rollDie";
-      payload: { playerNumber: number }; } |
+      payload: { playerNumber: PlayerNumber }; } |
     { type: "placeDie";
       payload: {
-        playerNumber: number;
+        playerNumber: PlayerNumber;
         calculatedPlayerValues: number[];
         calculatedOpponentValues: number[];
       };

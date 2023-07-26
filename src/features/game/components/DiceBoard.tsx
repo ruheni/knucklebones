@@ -6,9 +6,10 @@ import { api } from "~/utils/api";
 import { calculateTotalScore } from "~/features/game/utils/calculateTotalScore";
 import { calculatePlayerUpdatedValues } from "~/features/game/utils/calculatePlayerUpdatedValues";
 import { calculateOpponentUpdatedValues } from "~/features/game/utils/calculateOpponentUpdatedValues";
+import type { PlayerNumber } from "~/features/game/types";
 
 interface Props {
-  playerNumber: number;
+  playerNumber: PlayerNumber;
 }
 
 export const DiceBoard = ({ playerNumber }: Props) => {

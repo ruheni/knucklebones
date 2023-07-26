@@ -1,8 +1,9 @@
 import { Flex } from "@chakra-ui/react";
 import { usePlayerPartialScore } from "~/features/game/hooks/usePlayerPartialScore";
+import type { PlayerNumber } from "~/features/game/types";
 
 type Props = {
-  playerNumber: number;
+  playerNumber: PlayerNumber;
 };
 
 export const PartialScore = ({ playerNumber }: Props) => {

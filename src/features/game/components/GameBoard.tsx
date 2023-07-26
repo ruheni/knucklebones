@@ -52,13 +52,9 @@ export const GameBoard = ({ onQuit }: Props) => {
       <Stack direction="column" spacing={12}>
         <Button onClick={onQuit} alignSelf="center" colorScheme={isGameOver ? "primary" : "gray"}>Quit game</Button>
         <Stack direction="column" spacing={4} alignItems="center">
-          <PlayerBoard
-            playerNumber={0}
-          />
+          <PlayerBoard playerNumber={0} />
           <Divider />
-          <PlayerBoard
-            playerNumber={1}
-          />
+          <PlayerBoard playerNumber={1} />
         </Stack>
       </Stack>
       <AnimatePresence>
