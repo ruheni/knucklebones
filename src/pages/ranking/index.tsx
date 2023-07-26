@@ -37,7 +37,7 @@ const Ranking = () => {
                 <Td>{`# ${index + 1}`}</Td>
                 <Td>{winner}</Td>
                 <Td isNumeric>
-                  {(((_sum.delta || 0) * 10) + (_count.winner || 0) * 10)}
+                  {(((_sum.delta || 0) * 10) + ((_count.player + _count.opponent) || 0) * 10)}
                 </Td>
                 <Td textAlign="end">
                   <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
