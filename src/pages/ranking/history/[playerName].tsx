@@ -37,7 +37,7 @@ const History = () => {
       }) => (
         <Stack key={id}>
           <Text fontSize="2xl">
-            {`vs. ${player === playerName ? opponent : player}: ${calculateGameScore(delta || 0, winner || "")}`}
+            {`vs. ${player === playerName ? opponent : player}: +${calculateGameScore(delta || 0, winner || "")} pts.`}
           </Text>
           <MovesList gameId={id} />
         </Stack>
