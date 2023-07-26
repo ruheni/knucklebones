@@ -1,4 +1,4 @@
-import { useGame } from "~/features/game/GameContext";
+import { useGame } from "~/features/game/components/GameContext";
 import { calculatePartialScore } from "~/features/game/utils/calculatePartialScore";
 
 type Props = {

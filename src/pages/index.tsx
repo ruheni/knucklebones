@@ -1,6 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
-import { GameProvider } from "~/features/game/GameContext";
+import { GameProvider } from "~/features/game/components/GameContext";
 import { Game } from "~/features/game/Game";
 
 const Home = () => (

@@ -3,7 +3,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import type { PlayerNumber } from "~/features/game/types";
-import { useGame } from "~/features/game/GameContext";
+import { useGame } from "~/features/game/components/GameContext";
 import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
 
 type Props = {

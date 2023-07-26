@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Flex, SimpleGrid } from "@chakra-ui/react";
-import { Die } from "~/features/game/Die";
-import { useGame } from "~/features/game/GameContext";
+import { Die } from "~/features/game/components/Die";
+import { useGame } from "~/features/game/components/GameContext";
 import { api } from "~/utils/api";
 import { calculateTotalScore } from "~/features/game/utils/calculateTotalScore";
 import { calculatePlayerUpdatedValues } from "~/features/game/utils/calculatePlayerUpdatedValues";

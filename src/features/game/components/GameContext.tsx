@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Player, PlayerNumber } from "~/features/game/types";
-import type { GameFormValues } from "~/features/game/GameForm";
+import type { GameFormValues } from "~/features/game/components/GameForm";
 import { cloneDeep } from "lodash";
 
 type Action =

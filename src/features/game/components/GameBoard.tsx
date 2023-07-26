@@ -14,7 +14,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { PlayerBoard } from "~/features/game/PlayerBoard";
+import { PlayerBoard } from "~/features/game/components/PlayerBoard";
 import { useGameOver } from "~/features/game/hooks/useGameOver";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGameWinner } from "~/features/game/hooks/useGameWinner";

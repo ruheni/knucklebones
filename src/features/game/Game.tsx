@@ -1,7 +1,7 @@
-import { useGame } from "~/features/game/GameContext";
-import type { GameFormValues } from "~/features/game/GameForm";
-import { GameForm } from "~/features/game/GameForm";
-import { GameBoard } from "~/features/game/GameBoard";
+import { useGame } from "~/features/game/components/GameContext";
+import type { GameFormValues } from "~/features/game/components/GameForm";
+import { GameForm } from "~/features/game/components/GameForm";
+import { GameBoard } from "~/features/game/components/GameBoard";
 import * as React from "react";
 import { api } from "~/utils/api";
 

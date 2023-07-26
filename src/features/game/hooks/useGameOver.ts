@@ -1,4 +1,4 @@
-import { useGame } from "~/features/game/GameContext";
+import { useGame } from "~/features/game/components/GameContext";
 
 export const useGameOver = () => {
   const { state: { players, gameId } } = useGame();

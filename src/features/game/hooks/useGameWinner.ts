@@ -1,5 +1,5 @@
 import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
-import { useGame } from "~/features/game/GameContext";
+import { useGame } from "~/features/game/components/GameContext";
 import { useGameOver } from "~/features/game/hooks/useGameOver";
 
 export const useGameWinner = () => {

@@ -1,8 +1,8 @@
 import { Box, Flex, Stack } from "@chakra-ui/react";
 import React from "react";
-import { DiceBoard } from "~/features/game/DiceBoard";
-import { PartialScore } from "~/features/game/PartialScore";
-import { PlayerInfos } from "~/features/game/PlayerInfos";
+import { DiceBoard } from "~/features/game/components/DiceBoard";
+import { PartialScore } from "~/features/game/components/PartialScore";
+import { PlayerInfos } from "~/features/game/components/PlayerInfos";
 import type { PlayerNumber } from "~/features/game/types";
 
 type Props = {
