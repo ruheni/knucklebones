@@ -1,7 +1,7 @@
 import * as React from "react";
 import { api } from "~/utils/api";
 import {
-  Box, Skeleton, Stack,
+  Skeleton, Stack, Text,
 } from "@chakra-ui/react";
 
 type Props = {
@@ -26,7 +26,7 @@ export const MovesList = ({ gameId }: Props) => {
         id, player, opponent, playerValues, opponentValues,
       }) => (
         <Stack key={id}>
-          <Box>{`${player} ${playerValues} = 0 - ${opponent} ${opponentValues} = 0`}</Box>
+          <Text fontSize="lg">{`${player} ${playerValues} = 0 - ${opponent} ${opponentValues} = 0`}</Text>
         </Stack>
       ))}
     </Stack>
