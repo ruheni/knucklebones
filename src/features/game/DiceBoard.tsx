@@ -4,6 +4,7 @@ import { Die } from "~/features/game/Die";
 import { useGame } from "~/features/game/GameContext";
 import { api } from "~/utils/api";
 import { calculateOpponentUpdatedValues, calculatePlayerUpdatedValues } from "~/features/game/utils";
+import { calculateTotalScore } from "~/features/game/utils/calculateTotalScore";
 
 interface Props {
   playerNumber: number;
@@ -21,11 +22,13 @@ export const DiceBoard = ({ playerNumber }: Props) => {
         valueToPlace: players[playerNumber]?.valueToPlace || 0,
         position,
       });
+      const calculatedPlayerScore = calculateTotalScore({ values: calculatedPlayerValues });
       const calculatedOpponentValues = calculateOpponentUpdatedValues({
         opponentValues: players[opponentPlayerNumber]?.values || Array(9).fill(0),
         valueToPlace: players[playerNumber]?.valueToPlace || 0,
         position,
       });
+      const calculatedOpponentScore = calculateTotalScore({ values: calculatedOpponentValues });
       dispatch({
         type: "placeDie",
         payload: {
@@ -39,6 +42,8 @@ export const DiceBoard = ({ playerNumber }: Props) => {
         opponent: players[opponentPlayerNumber]?.name || "",
         playerValues: calculatedPlayerValues,
         opponentValues: calculatedOpponentValues,
+        playerScore: calculatedPlayerScore,
+        opponentScore: calculatedOpponentScore,
       });
     }
   }, [addMove, dispatch, gameId, playerNumber, players]);
