@@ -51,7 +51,7 @@ export const gameRouter = createTRPCRouter({
         ],
       },
       by: ["winner"],
-      _count: { winner: true },
+      _count: { player: true, opponent: true },
       _sum: { delta: true },
     })),
   getGamesByPlayer: publicProcedure
