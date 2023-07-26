@@ -48,13 +48,8 @@ export const gameRouter = createTRPCRouter({
     })),
   getRanking: publicProcedure
     .query(({ ctx }) => ctx.prisma.game.groupBy({
-      where: {
-        OR: [
-          { player: { equals: ctx.prisma.game.fields.winner } },
-          { opponent: { equals: ctx.prisma.game.fields.winner } },
-        ],
-      },
       by: ["winner"],
+      having: { winner: { not: null } },
       _count: { player: true, opponent: true },
       _sum: { delta: true },
     })),
