@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calculateTotalScore should return the correct total score 1`] = `54`;
