@@ -5,6 +5,7 @@ import React from "react";
 import type { PlayerOrder } from "~/features/game/types";
 import { useGame } from "~/features/game/components/GameContext";
 import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
+import { Die } from "~/features/game/components/Die";
 
 type Props = {
   playerOrder: PlayerOrder;
@@ -40,16 +41,11 @@ export const PlayerConsole = ({
       </Button>
       <HStack>
         <Text>Die to insert</Text>
-        <Flex
-          width="50px"
-          height="50px"
-          alignItems="center"
-          justifyContent="center"
-          borderWidth="1px"
-          borderRadius="lg"
-        >
-          {(currentContender?.valueToPlace || 0) > 0 ? currentContender?.valueToPlace : "-"}
-        </Flex>
+        <Die
+          value={(currentContender?.valueToPlace || 0) > 0
+            ? (currentContender?.valueToPlace || 0)
+            : 0}
+        />
       </HStack>
     </Flex>
   );
