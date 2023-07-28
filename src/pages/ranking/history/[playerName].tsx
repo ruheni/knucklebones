@@ -1,6 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import {
+  Box,
   Button,
   Heading, Skeleton, Stack, Text,
 } from "@chakra-ui/react";
@@ -12,6 +13,8 @@ const History = () => {
   const { query: { playerName }, back } = useRouter();
   const getGames = api.game.getGamesByPlayer.useQuery({
     playerName: playerName as string,
+  }, {
+    enabled: !!playerName,
   });
 
   const calculateGameScore = (delta: number, winner: string) => {
@@ -24,11 +27,13 @@ const History = () => {
   const getContent = () => {
     if (getGames.isLoading) {
       return (
-        <>
+        <Stack spacing={12} px={4}>
           <Skeleton height="60px" />
           <Skeleton height="60px" />
           <Skeleton height="60px" />
-        </>
+          <Skeleton height="60px" />
+          <Skeleton height="60px" />
+        </Stack>
       );
     }
     return (
@@ -36,10 +41,10 @@ const History = () => {
         id, player, opponent, delta, winner,
       }) => (
         <Stack key={id}>
-          <Text fontSize="2xl">
+          <Text fontSize="2xl" px={4}>
             {`vs. ${player === playerName ? opponent : player}: +${calculateGameScore(delta || 0, winner || "")} pts.`}
           </Text>
-          <MovesList gameId={id} playerName={playerName as string} />
+          <MovesList gameId={id} />
         </Stack>
       ))
     );
@@ -55,9 +60,13 @@ const History = () => {
       <Stack spacing={16}>
         <Button onClick={back} alignSelf="center">Back to ranking</Button>
         <Heading alignSelf="center">{`${playerName}'s History`}</Heading>
-        <Stack spacing={12}>
-          {getContent()}
-        </Stack>
+        <Box>
+          <Box py={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" overflow="auto">
+            <Stack spacing={12}>
+              {getContent()}
+            </Stack>
+          </Box>
+        </Box>
       </Stack>
     </>
   );
