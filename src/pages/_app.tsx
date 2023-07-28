@@ -8,7 +8,7 @@ import baseTheme from "~/themes/baseTheme";
 import { Poppins } from "~/components/fonts/Poppins";
 import { type NextPage } from "next";
 import { type ReactElement, type ReactNode } from "react";
-import Layout from "~/components/layouts/Layout";
+import Layout from "~/layouts/Layout";
 
 export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
