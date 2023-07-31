@@ -50,7 +50,7 @@ const Ranking = () => {
                     <Td>{`# ${index + 1}`}</Td>
                     <Td>{winner}</Td>
                     <Td isNumeric>
-                      <TotalScore playerName={winner || ""} delta={_sum.delta || 0} />
+                      <TotalScore playerName={winner} delta={_sum.delta} />
                     </Td>
                     <Td textAlign="end">
                       <NextLink href={`/ranking/history/${encodeURIComponent(winner!)}`}>
