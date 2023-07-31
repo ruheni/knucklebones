@@ -23,7 +23,7 @@ const Navbar = () => {
           <Box minWidth="100px" textAlign="center">How to play</Box>
         </ActiveLink>
         <ActiveLink href="/ranking">
-          <Box minWidth="100px">Ranking</Box>
+          <Box minWidth="100px" textAlign="end">Ranking</Box>
         </ActiveLink>
       </>
     );
