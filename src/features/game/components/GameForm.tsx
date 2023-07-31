@@ -34,7 +34,7 @@ export const GameForm = ({ onSubmit, initialValues }: Props) => (
       >
         {({ isValid }) => (
           <Form>
-            <Flex gap={4} alignItems="center" justifyContent="space-between">
+            <Flex direction={["column", "row"]} gap={4} alignItems="center" justifyContent="space-between">
               <Flex direction="column" gap={4}>
                 <Box width={["2xs", "md"]} height="64px">
                   <Field as={Input} type="text" name="playerOne" placeholder="Player 1" />
