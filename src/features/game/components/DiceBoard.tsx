@@ -69,7 +69,7 @@ export const DiceBoard = ({ playerOrder }: Props) => {
   ]);
 
   return (
-    <Flex justifyContent="center" alignItems="center" px={8}>
+    <Flex justifyContent="center" alignItems="center" px={8} grow={1}>
       <SimpleGrid columns={3} row={3} spacing={4}>
         {currentContender?.values.map((value, index) => (
           <Die

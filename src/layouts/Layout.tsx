@@ -14,6 +14,7 @@ const Layout = ({ children }: Props) => (
     backgroundPosition="cover"
     backgroundRepeat="no-repeat"
     backgroundSize="cover"
+    w="100vw"
   >
     <Navbar />
     <Flex

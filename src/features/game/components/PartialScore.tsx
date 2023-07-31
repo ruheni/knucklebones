@@ -10,7 +10,7 @@ export const PartialScore = ({ playerOrder }: Props) => {
   const { column1Score, column2Score, column3Score } = usePlayerPartialScore({ playerOrder });
 
   return (
-    <Flex gap={4} px={8}>
+    <Flex gap={4} px={8} grow={1} justifyContent="center">
       <Flex
         width="50px"
         height="50px"

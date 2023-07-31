@@ -23,7 +23,7 @@ export const PlayerConsole = ({
   const remainder = playerOrder === "player" ? 1 : 0;
 
   return (
-    <Flex direction="column" width="400px" gap={2}>
+    <Flex direction="column" gap={2} minWidth={[null, "200px"]}>
       <Heading>{currentContender?.name}</Heading>
       <Text fontWeight="bold">
         {`Total score: ${totalScore}`}
