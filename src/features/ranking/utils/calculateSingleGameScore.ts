@@ -5,8 +5,8 @@ type Props = {
 };
 
 export const calculateSingleGameScore = ({ delta = 0, winner = "", playerName }: Props) => {
-  if (winner === playerName) {
-    return ((delta || 0) * 10) + 10;
+  if (winner === playerName && delta !== null) {
+    return (delta * 10) + 10;
   }
   return 10;
 };
