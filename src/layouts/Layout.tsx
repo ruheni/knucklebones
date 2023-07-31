@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import * as React from "react";
-import { FOOTER_HEIGHT, NAVBAR_HEIGHT, PAGE_WIDTH } from "~/constants/layout";
+import { FOOTER_HEIGHT, NAVBAR_HEIGHT, PAGE_WIDTHS } from "~/constants/layout";
 import Footer from "~/layouts/Footer";
 import Navbar from "~/layouts/Navbar";
 
@@ -23,7 +23,7 @@ const Layout = ({ children }: Props) => (
       py="32px"
       minHeight={`calc(100vh - ${NAVBAR_HEIGHT}px - ${FOOTER_HEIGHT}px)`}
     >
-      <Box width={PAGE_WIDTH}>{children}</Box>
+      <Box width={PAGE_WIDTHS}>{children}</Box>
     </Flex>
     <Footer />
   </Box>

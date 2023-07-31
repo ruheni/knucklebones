@@ -36,11 +36,11 @@ export const GameForm = ({ onSubmit, initialValues }: Props) => (
           <Form>
             <Flex direction={["column", "row"]} gap={4} alignItems="center" justifyContent="space-between">
               <Flex direction="column" gap={4}>
-                <Box width={["2xs", "md"]} height="64px">
+                <Box width={["xs", "md"]} height="64px">
                   <Field as={Input} type="text" name="playerOne" placeholder="Player 1" />
                   <ErrorMessage component="div" name="playerOne" />
                 </Box>
-                <Box width={["2xs", "md"]} height="64px">
+                <Box width={["xs", "md"]} height="64px">
                   <Field as={Input} type="text" name="playerTwo" placeholder="Player 2" />
                   <ErrorMessage component="div" name="playerTwo" />
                 </Box>
