@@ -1,5 +1,5 @@
 import {
-  Box, Flex, Stack, useMediaQuery,
+  Flex, Stack, useMediaQuery,
 } from "@chakra-ui/react";
 import React from "react";
 import { DiceBoard } from "~/features/game/components/DiceBoard";
