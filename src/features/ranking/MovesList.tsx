@@ -12,7 +12,7 @@ type MoveDetailBlockProps = {
   score: number;
 };
 const MoveDetailBlock = ({ name, values, score }: MoveDetailBlockProps) => (
-  <Stack direction="row" fontSize="lg" spacing={8} px={4}>
+  <Stack direction="row" fontSize="lg" spacing={8} px={[4, 8]}>
     <Text noOfLines={1} minW="180px">
       <span>{name}</span>
     </Text>
@@ -32,7 +32,7 @@ export const MovesList = ({ gameId }: Props) => {
 
   if (getMoves.isLoading) {
     return (
-      <Stack spacing={2} px={4}>
+      <Stack spacing={2} px={8}>
         <Skeleton height="24px" />
         <Skeleton height="24px" />
         <Skeleton height="24px" />
