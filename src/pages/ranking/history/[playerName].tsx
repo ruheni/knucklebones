@@ -8,6 +8,7 @@ import {
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import { MovesList } from "~/features/ranking/MovesList";
+import { calculateSingleGameScore } from "~/features/ranking/utils/calculateSingleGameScore";
 
 const History = () => {
   const { query: { playerName }, back } = useRouter();
@@ -16,13 +17,6 @@ const History = () => {
   }, {
     enabled: !!playerName,
   });
-
-  const calculateGameScore = (delta: number, winner: string) => {
-    if (winner === playerName) {
-      return ((delta || 0) * 10) + 10;
-    }
-    return 10;
-  };
 
   const getContent = () => {
     if (getGames.isLoading) {
@@ -42,7 +36,11 @@ const History = () => {
       }) => (
         <Stack key={id}>
           <Text fontSize="2xl" px={4}>
-            {`vs. ${player === playerName ? opponent : player}: +${calculateGameScore(delta || 0, winner || "")} pts.`}
+            {`vs. ${player === playerName ? opponent : player}: +${calculateSingleGameScore({
+              delta,
+              winner,
+              playerName: playerName as string,
+            })} pts.`}
           </Text>
           <MovesList gameId={id} />
         </Stack>
