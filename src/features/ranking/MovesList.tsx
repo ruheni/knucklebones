@@ -4,7 +4,7 @@ import {
   Flex,
   Skeleton, Stack, Text,
 } from "@chakra-ui/react";
-import { formatValues } from "~/features/ranking/utils";
+import { formatDiceValues } from "~/features/ranking/utils/formatDiceValues";
 
 type MoveDetailBlockProps = {
   name: string;
@@ -17,7 +17,7 @@ const MoveDetailBlock = ({ name, values, score }: MoveDetailBlockProps) => (
       <span>{name}</span>
     </Text>
     <Text noOfLines={1} letterSpacing={1} fontFamily="monospace" minW="200px">
-      {formatValues(values)}
+      {formatDiceValues(values)}
     </Text>
     <Text minW="10px" textAlign="end">{" = "}</Text>
     <Text minW="40px" textAlign="end">{score}</Text>

@@ -1,4 +1,4 @@
-export const formatValues = (values: string) => {
+export const formatDiceValues = (values: string) => {
   const valuesArray = values.split(",");
   return valuesArray.map((e, i) => {
     if ((i + 1) % 3) {
