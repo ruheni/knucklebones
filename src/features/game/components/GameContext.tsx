@@ -56,7 +56,7 @@ function gameReducer(state: State, action: Action) {
       };
     }
     case "addRound": {
-      return { ...state, round: state.round + 1 };
+      return { ...cloneDeep(state), round: state.round + 1 };
     }
     case "quitGame": {
       return INITIAL_STATE;
