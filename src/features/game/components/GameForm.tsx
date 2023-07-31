@@ -23,7 +23,7 @@ const validationSchema = () => yup.object().shape({
 });
 
 export const GameForm = ({ onSubmit, initialValues }: Props) => (
-  <Stack direction="column" alignItems="center" width="100%" spacing={16}>
+  <Stack direction="column" alignItems="center" spacing={16}>
     <Heading>Knucklebones</Heading>
     <Flex p={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
       <Formik
@@ -36,11 +36,11 @@ export const GameForm = ({ onSubmit, initialValues }: Props) => (
           <Form>
             <Flex gap={4} alignItems="center" justifyContent="space-between">
               <Flex direction="column" gap={4}>
-                <Box width="md" height="64px">
+                <Box width={["2xs", "md"]} height="64px">
                   <Field as={Input} type="text" name="playerOne" placeholder="Player 1" />
                   <ErrorMessage component="div" name="playerOne" />
                 </Box>
-                <Box width="md" height="64px">
+                <Box width={["2xs", "md"]} height="64px">
                   <Field as={Input} type="text" name="playerTwo" placeholder="Player 2" />
                   <ErrorMessage component="div" name="playerTwo" />
                 </Box>
