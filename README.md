@@ -4,6 +4,8 @@ This is Knucklebones, a web application inspired to the mini-game [Knucklebones]
 
 [Here](https://www.youtube.com/watch?v=y4PfvZiEs5E) you can find a video demo of the game.
 
+It can be played by two users on the same device.
+
 ## Stack
 
 To develop the app I used the [T3 Stack](https://create.t3.gg/), bootstrapped with `create-t3-app`.
