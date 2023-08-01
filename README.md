@@ -6,6 +6,8 @@ This is Knucklebones, a web application inspired to the mini-game [Knucklebones]
 
 It can be played by two users on the same device.
 
+The app could be used both on desktop and mobile.
+
 ## Stack
 
 To develop the app I used the [T3 Stack](https://create.t3.gg/), bootstrapped with `create-t3-app`.
@@ -13,7 +15,6 @@ To develop the app I used the [T3 Stack](https://create.t3.gg/), bootstrapped wi
 ## Deployed version
 You can find a live version of the app [here](https://knucklebones-delta.vercel.app/).
 
-The app could be uses both on desktop and mobile.
 
 ## How to run it locally
 - create an `.env` file based on the `.env.example` file and add the following secrets:
