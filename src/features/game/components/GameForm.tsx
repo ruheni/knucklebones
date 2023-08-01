@@ -26,7 +26,7 @@ const validationSchema = () => yup.object().shape({
 export const GameForm = ({ onSubmit, initialValues }: Props) => (
   <Stack direction="column" alignItems="center" spacing={16}>
     <Heading>Knucklebones</Heading>
-    <Flex p={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
+    <Flex p={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" opacity="0.95">
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

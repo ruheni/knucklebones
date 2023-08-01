@@ -59,7 +59,7 @@ const History = () => {
         <Button onClick={back} alignSelf="center">Back to ranking</Button>
         <Heading alignSelf="center">{`${playerName}'s History`}</Heading>
         <Box>
-          <Box py={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" overflow="auto" maxHeight="2xl">
+          <Box py={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" opacity="0.95" overflow="auto" maxHeight="2xl">
             <Stack spacing={12}>
               {getContent()}
             </Stack>

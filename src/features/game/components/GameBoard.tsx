@@ -42,7 +42,7 @@ export const GameBoard = ({ onQuit }: Props) => {
   }, [delta, endGame, gameId, onClose, onQuit, score, winnerName]);
 
   return (
-    <Box pt={4} pb={8} px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
+    <Box pt={4} pb={8} px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" opacity="0.98">
       <Stack direction="column" spacing={12}>
         <Button
           leftIcon={<BiLeftArrowAlt />}
