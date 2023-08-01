@@ -8,12 +8,10 @@ This is Knucklebones, a web application inspired to the mini-game [Knucklebones]
 
 To develop the app I used the [T3 Stack](https://create.t3.gg/), bootstrapped with `create-t3-app`.
 
-## Run it locally
-Unfortunately, the app cannot run locally because it needs a postgres database to work.
-
+## Deployed version
 You can find a live version of the app [here](https://knucklebones-delta.vercel.app/).
 
-## Things to do before you can start the project locally
+## How to run it locally
 - create an `.env` based on the `.env.example` and add the missing secrets:
   - POSTGRES_PRISMA_URL: the url of the postgres database
   - POSTGRES_URL_NON_POOLING: the url of the postgres database without pooling
