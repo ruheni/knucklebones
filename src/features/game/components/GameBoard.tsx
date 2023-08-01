@@ -12,6 +12,7 @@ import { AnimatePresence } from "framer-motion";
 import { useGameWinner } from "~/features/game/hooks/useGameWinner";
 import { api } from "~/utils/api";
 import { GameOverModal } from "~/features/game/components/GameOverModal";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 interface Props {
   onQuit: () => void;
@@ -43,7 +44,14 @@ export const GameBoard = ({ onQuit }: Props) => {
   return (
     <Box pt={4} pb={8} px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50">
       <Stack direction="column" spacing={12}>
-        <Button onClick={onQuit} alignSelf="start" colorScheme={isGameOver ? "primary" : "gray"}>Quit game</Button>
+        <Button
+          leftIcon={<BiLeftArrowAlt />}
+          onClick={onQuit}
+          alignSelf="start"
+          colorScheme={isGameOver ? "primary" : "gray"}
+        >
+          Quit game
+        </Button>
         <Stack direction="column" spacing={4}>
           <PlayerBoard playerOrder="player" />
           <Divider />
