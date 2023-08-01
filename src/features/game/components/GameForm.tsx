@@ -6,6 +6,7 @@ import {
   ErrorMessage, Field, Form, Formik,
 } from "formik";
 import * as yup from "yup";
+import { FiArrowRight } from "react-icons/fi";
 
 export type GameFormValues = {
   playerOne: string;
@@ -18,8 +19,8 @@ type Props = {
 };
 
 const validationSchema = () => yup.object().shape({
-  playerOne: yup.string().required().min(3),
-  playerTwo: yup.string().required().min(3),
+  playerOne: yup.string().required("Player 1 is required").min(3, "Player 1 must be at least 3 characters"),
+  playerTwo: yup.string().required("Player 2 is required").min(3, "Player 2 must be at least 3 characters"),
 });
 
 export const GameForm = ({ onSubmit, initialValues }: Props) => (
@@ -45,15 +46,18 @@ export const GameForm = ({ onSubmit, initialValues }: Props) => (
                   <ErrorMessage component="div" name="playerTwo" />
                 </Box>
               </Flex>
-              <Button
+              <Box
+                as={Button}
                 type="submit"
                 colorScheme="primary"
                 isDisabled={!isValid}
-                size="lg"
-                borderRadius={8}
+                h="100px"
+                w="100px"
+                borderRadius="100px"
+                rightIcon={<FiArrowRight />}
               >
                 Start
-              </Button>
+              </Box>
             </Flex>
           </Form>
         )}
