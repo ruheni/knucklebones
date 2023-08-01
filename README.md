@@ -11,6 +11,8 @@ To develop the app I used the [T3 Stack](https://create.t3.gg/), bootstrapped wi
 ## Deployed version
 You can find a live version of the app [here](https://knucklebones-delta.vercel.app/).
 
+The app could be uses both on desktop and mobile.
+
 ## How to run it locally
 - create an `.env` file based on the `.env.example` file and add the following secrets:
   - POSTGRES_PRISMA_URL: the url of the postgres database
