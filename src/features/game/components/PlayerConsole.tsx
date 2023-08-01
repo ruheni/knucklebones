@@ -6,6 +6,7 @@ import type { PlayerOrder } from "~/features/game/types";
 import { useGame } from "~/features/game/components/GameContext";
 import { usePlayerTotalScore } from "~/features/game/hooks/usePlayerTotalScore";
 import { Die } from "~/features/game/components/Die";
+import { BsPlayFill } from "react-icons/bs";
 
 type Props = {
   playerOrder: PlayerOrder;
@@ -29,6 +30,7 @@ export const PlayerConsole = ({
         {`Total score: ${totalScore}`}
       </Text>
       <Button
+        rightIcon={<BsPlayFill />}
         isDisabled={
           round % 2 === remainder
             || players.some((player) => player.values.every((value) => value !== 0))
