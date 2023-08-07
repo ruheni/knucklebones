@@ -60,13 +60,13 @@ export const gameRouter = createTRPCRouter({
         select winner from (
             SELECT player as "winner", "createdAt"
             from "Game"
-            where player not in (select distinct winner from "Game" where winner is not null) AND winner is not null
+            where winner is not null AND "Game".player != winner
             UNION
             SELECT opponent as "winner", "createdAt"
             from "Game"
-            where opponent not in (select distinct winner from "Game" where winner is not null) and winner is not null
+            where winner is not null and "Game".opponent != winner
             ) as main
-        order by "createdAt" asc) 
+        order by "createdAt" asc)
     as mainTwo group by winner order by delta desc`),
   getGamesByPlayer: publicProcedure
     .input(z.object({
