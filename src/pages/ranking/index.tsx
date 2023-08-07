@@ -123,7 +123,16 @@ const Ranking = () => {
       </Head>
       <Stack spacing={16}>
         <Heading alignSelf="center">Ranking</Heading>
-        <Box px={4} borderWidth="1px" borderRadius="lg" alignItems="center" bg="orange.50" opacity="0.95" overflow="auto" maxHeight="2xl" height="lg">
+        <Box
+          px={4}
+          borderWidth="1px"
+          borderRadius="lg"
+          alignItems="center"
+          bg="orange.50"
+          opacity="0.95"
+          overflow="auto"
+          height={["lg", "2xl"]}
+        >
           {getContent()}
         </Box>
       </Stack>
