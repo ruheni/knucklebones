@@ -28,7 +28,7 @@ dependencies:
     version: 5.0.0(prisma@5.0.0)
   '@t3-oss/env-nextjs':
     specifier: ^0.3.1
-    version: 0.3.1(typescript@5.0.4)(zod@3.21.4)
+    version: 0.3.1(typescript@5.0.4)(zod@4.6.6)
   '@tanstack/react-query':
     specifier: ^4.29.7
     version: 4.29.7(react-dom@18.2.0)(react@18.2.0)
@@ -78,8 +78,8 @@ dependencies:
     specifier: ^1.2.0
     version: 1.2.0
   zod:
-    specifier: ^3.21.4
-    version: 3.21.4
+    specifier: ^4.6.6
+    version: 4.6.6
 
 devDependencies:
   '@fedeviotti/eslint-config':
@@ -2230,25 +2230,25 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@t3-oss/env-core@0.3.1(typescript@5.0.4)(zod@3.21.4):
+  /@t3-oss/env-core@0.3.1(typescript@5.0.4)(zod@4.6.6):
     resolution: {integrity: sha512-iEnBuWeSjzqQLDTUw7H+YhstV4OZrGXTkQGL6ZOMxZQoCmwGX7GVS+1KCd5RvCzOtrIAD9jeOItSWNjC7sG4Sg==}
     peerDependencies:
       typescript: '>=4.7.2'
       zod: ^3.0.0
     dependencies:
       typescript: 5.0.4
-      zod: 3.21.4
+      zod: 4.6.6
     dev: false
 
-  /@t3-oss/env-nextjs@0.3.1(typescript@5.0.4)(zod@3.21.4):
+  /@t3-oss/env-nextjs@0.3.1(typescript@5.0.4)(zod@4.6.6):
     resolution: {integrity: sha512-W1OgOn5xtpdEGraAQesyLzO2aNLRfSJEyK6qjQFfEUnrPbkvB+WxABX2bPMqfn4KJQ8pziLCSdBFiUN8OagqAg==}
     peerDependencies:
       typescript: '>=4.7.2'
       zod: ^3.0.0
     dependencies:
-      '@t3-oss/env-core': 0.3.1(typescript@5.0.4)(zod@3.21.4)
+      '@t3-oss/env-core': 0.3.1(typescript@5.0.4)(zod@4.6.6)
       typescript: 5.0.4
-      zod: 3.21.4
+      zod: 4.6.6
     dev: false
 
   /@tanstack/query-core@4.29.7:
@@ -4175,8 +4175,8 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -4940,7 +4940,7 @@ packages:
       micromatch: 4.0.5
       walker: 1.0.8
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /jest-leak-detector@29.6.2:
@@ -6853,4 +6853,8 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zod@4.6.6:
+    resolution: {integrity: sha512-4UmzQUF5fxvfcYHlbjBmejU+w+hbDnWFx4aS8kBx7nPBHcO2SqPbpAG8snbdg+Xse4pRefR98hgjFgIMCI/UhA==}
     dev: false
